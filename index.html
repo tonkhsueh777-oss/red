@@ -3,267 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024 龍年好物節</title>
+    <title>新春好禮 | 手機版網頁</title>
     <style>
+        /* --- 基礎設定 (喜氣紅金配色) --- */
         :root {
-            --primary-red: #d93025; /* 新年紅 */
-            --bg-color: #fcf6e9;    /* 米黃底色 */
-            --text-dark: #4a2c2c;   /* 深褐文字 */
-            --gold: #d4af37;        /* 金色點綴 */
+            --primary-red: #d32f2f;  /* 主紅色 */
+            --dark-red: #8e0000;     /* 深紅色 */
+            --gold: #ffb300;         /* 金色 */
+            --bg-color: #fffbf0;     /* 米黃背景 */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            font-family: "PingFang TC", "Microsoft JhengHei", serif;
-            background-color: #eee;
-            color: var(--text-dark);
-            line-height: 1.5;
-        }
-
-        /* 手機容器模擬 */
-        .mobile-container {
-            max-width: 480px;
-            margin: 0 auto;
+            margin: 0;
+            padding: 0;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
-            min-height: 100vh;
+            color: #333;
+            max-width: 480px; /* 手機寬度限制 */
+            margin: 0 auto;   /* 居中 */
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            padding-bottom: 80px; /* 底部按鈕空間 */
         }
 
-        /* 圖片通用樣式 */
-        img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
+        /* 圖片自適應 */
+        img { width: 100%; display: block; height: auto; }
+
+        /* 卡片容器 */
+        .card {
+            background: #fff;
+            margin: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
+        /* 文字樣式 */
+        .title { font-size: 1.1rem; font-weight: bold; color: var(--dark-red); margin-bottom: 5px; }
+        .price { color: var(--primary-red); font-weight: bold; font-size: 1.2rem; }
+        .desc { font-size: 0.9rem; color: #666; }
+        .padding-box { padding: 15px; }
+
+        /* --- 特殊區塊樣式 --- */
+        
         /* 1. 頂部 Banner */
-        .header-banner {
-            position: relative;
+        header {
             background: var(--primary-red);
             color: #fff;
             padding: 40px 20px;
             text-align: center;
         }
-        .header-banner h1 { font-size: 2rem; margin-bottom: 10px; letter-spacing: 2px; }
-        .header-banner p { font-size: 1rem; opacity: 0.9; }
 
-        /* 通用間距與區塊 */
-        .section {
-            margin-bottom: 20px;
-            padding: 0 15px; /* 左右留白 */
-        }
-        
-        /* 全寬區塊（圖片貼邊） */
-        .section-full {
-            margin-bottom: 20px;
-            padding: 0;
-        }
-
-        /* 2. 六格文字區 */
-        .grid-6-text {
+        /* 2. 六格文字 */
+        .grid-6 {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3欄 */
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            padding: 20px 15px;
-            background: #fff;
-            margin-bottom: 20px;
-        }
-        .text-item {
-            text-align: center;
-            font-size: 0.85rem;
-            padding: 10px 0;
-            border: 1px dashed #ddd;
-            border-radius: 8px;
-            color: var(--primary-red);
-        }
-
-        /* 產品卡片標題與價格 */
-        .product-info {
-            background: #fff;
             padding: 15px;
-            text-align: center;
-            margin-top: -5px; /* 連接圖片 */
         }
-        .p-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
-        .p-price { color: var(--primary-red); font-weight: bold; }
+        .grid-6-item {
+            background: #fff;
+            border: 1px solid var(--gold);
+            color: var(--primary-red);
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
 
-        /* 13. 九宮格 (徽章區) */
+        /* 5. 深色海報 */
+        .dark-section {
+            background: #3e2723;
+            color: var(--gold);
+            text-align: center;
+            padding: 30px 15px;
+            margin: 15px 0;
+        }
+
+        /* 13. 九宮格 */
         .grid-9 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            padding: 10px;
+            padding: 15px;
         }
-        .grid-9 img {
-            border-radius: 50%; /* 圓形 */
-            aspect-ratio: 1/1;
-        }
+        .grid-9 img { border-radius: 50%; aspect-ratio: 1/1; object-fit: cover; }
 
-        /* 15. 四格展示 (紅包袋區) */
+        /* 15. 四格紅包 */
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             padding: 15px;
-        }
-        .grid-4-item {
-            background: #fff;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         /* 底部按鈕 */
-        .fab-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-red);
-            color: #fff;
-            padding: 12px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(217, 48, 37, 0.4);
-            cursor: pointer;
-            z-index: 100;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
+        .fab {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--dark-red); color: var(--gold);
+            padding: 12px 30px; border-radius: 50px; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); width: 80%; text-align: center;
         }
     </style>
 </head>
 <body>
 
-<div class="mobile-container">
+    <header>
+        <h1>2024 新春好禮</h1>
+        <p>過年送禮 · 喜氣首選</p>
+    </header>
 
-    <div class="header-banner">
-        <h1>2024 龍年大吉</h1>
-        <p>新春好物節 | 為生活加點喜氣</p>
+    <div class="grid-6">
+        <div class="grid-6-item">大吉</div>
+        <div class="grid-6-item">大利</div>
+        <div class="grid-6-item">平安</div>
+        <div class="grid-6-item">喜樂</div>
+        <div class="grid-6-item">招財</div>
+        <div class="grid-6-item">進寶</div>
     </div>
 
-    <div class="grid-6-text">
-        <div class="text-item">龍年大吉</div>
-        <div class="text-item">萬事如意</div>
-        <div class="text-item">恭喜發財</div>
-        <div class="text-item">身體健康</div>
-        <div class="text-item">心想事成</div>
-        <div class="text-item">鴻運當頭</div>
-    </div>
-
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1548676239-16a760b21394?auto=format&fit=crop&w=600" alt="好運袋著走">
-        <div class="product-info">
-            <div class="p-title">好運袋著走 - 居家系列</div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1548676239-16a760b21394?w=600" alt="居家系列">
+        <div class="padding-box">
+            <div class="title">居家好運系列</div>
+            <div class="desc">讓好運充滿生活的每個角落。</div>
         </div>
     </div>
 
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600" alt="金玉滿堂">
-        <div class="product-info">
-            <div class="p-title">金玉滿堂 - 甜玉米</div>
-            <div class="p-price">NT$ 399</div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600" alt="玉米">
+        <div class="padding-box">
+            <div class="title">黃金甜玉米</div>
+            <div class="price">NT$ 399 / 箱</div>
         </div>
     </div>
 
-    <div class="section-full">
-        <div style="background: #2c1e1e; color: #d4af37; padding: 40px 20px; text-align: center;">
-            <h2>新春限定特展</h2>
-            <p>傳統工藝 x 現代設計</p>
+    <div class="dark-section">
+        <h2>新春限定特展</h2>
+        <p>Traditional Crafts x New Design</p>
+    </div>
+
+    <div class="card">
+        <img src="https://plus.unsplash.com/premium_photo-1664202526559-e21e9c665938?w=600" alt="帆布袋">
+        <div class="padding-box">
+            <div class="title">招財進寶帆布袋</div>
+            <div class="price">NT$ 450</div>
         </div>
     </div>
 
-    <div class="section">
-        <img src="https://plus.unsplash.com/premium_photo-1664202526559-e21e9c665938?auto=format&fit=crop&w=600" style="border-radius: 10px;" alt="招財進寶">
-        <div class="product-info">
-            <div class="p-title">招財進寶帆布袋</div>
-            <div class="p-price">NT$ 450</div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600" alt="禮盒">
+        <div class="padding-box">
+            <div class="title">新春大禮盒</div>
+            <div class="price">NT$ 888</div>
         </div>
     </div>
 
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=600" alt="新年禮盒">
-        <div class="product-info">
-            <div class="p-title">大吉大利禮盒</div>
-            <div class="p-price">NT$ 888</div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1636213794104-5f5087e5927c?w=600" alt="摺扇">
+        <div class="padding-box">
+            <div class="title">古典摺扇 (附立架)</div>
+            <div class="price">NT$ 250</div>
         </div>
     </div>
 
-    <div class="section">
-        <img src="https://images.unsplash.com/photo-1636213794104-5f5087e5927c?auto=format&fit=crop&w=600" style="border-radius: 10px;" alt="古典摺扇">
-        <div class="product-info">
-            <div class="p-title">古典風雅摺扇</div>
+    <div style="padding: 15px;">
+        <img src="https://images.unsplash.com/photo-1597484662317-c92534dd25d0?w=600" style="border-radius:12px;" alt="掛圖">
+    </div>
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1582260667355-6c7030800d11?w=600" alt="扇子">
+        <div class="padding-box">
+            <div class="title">國潮手搖扇</div>
+            <div class="desc">夏日納涼，新春裝飾皆宜。</div>
         </div>
     </div>
 
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1597484662317-c92534dd25d0?auto=format&fit=crop&w=600" alt="掛式帆布袋">
+    <div style="padding: 15px;">
+        <img src="https://images.unsplash.com/photo-1601642878204-58a5c48b2696?w=600" style="border-radius:12px;" alt="玉米籃">
     </div>
 
-    <div class="section">
-        <img src="https://images.unsplash.com/photo-1582260667355-6c7030800d11?auto=format&fit=crop&w=600" style="border-radius: 10px;" alt="國潮摺扇">
-        <div class="product-info">
-            <div class="p-title">國潮設計摺扇</div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600" alt="抱枕">
+        <div class="padding-box">
+            <div class="title">福氣抱枕</div>
+            <div class="price">NT$ 520</div>
         </div>
     </div>
 
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1601642878204-58a5c48b2696?auto=format&fit=crop&w=600" alt="有機玉米">
-    </div>
-
-    <div class="section">
-        <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=600" style="border-radius: 10px;" alt="福氣抱枕">
-        <div class="product-info">
-            <div class="p-title">福氣滿滿抱枕</div>
+    <div class="card">
+        <div class="padding-box" style="text-align:center;">
+            <div class="title">龍年限定徽章</div>
         </div>
-    </div>
-
-    <div class="section">
-        <h3 style="text-align:center; margin-bottom:10px;">龍年限定徽章系列</h3>
         <div class="grid-9">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=龍" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=吉" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=祥" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=如" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=意" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=發" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=財" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=福" alt="徽章">
-            <img src="https://via.placeholder.com/150/d93025/fff?text=春" alt="徽章">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=龍" alt="1">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=年" alt="2">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=行" alt="3">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=大" alt="4">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=運" alt="5">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=發" alt="6">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=財" alt="7">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=平" alt="8">
+            <img src="https://via.placeholder.com/150/d32f2f/fff?text=安" alt="9">
         </div>
     </div>
 
-    <div class="section-full">
-        <img src="https://images.unsplash.com/photo-1606325492476-857c152433e5?auto=format&fit=crop&w=600" alt="精美包裝">
+    <div style="padding: 15px;">
+        <img src="https://images.unsplash.com/photo-1606325492476-857c152433e5?w=600" style="border-radius:12px;" alt="包裝">
     </div>
 
-    <div class="section">
-        <h3 style="text-align:center; margin-bottom:10px;">精選紅包袋</h3>
+    <div class="card">
+        <div class="padding-box" style="text-align:center;">
+            <div class="title">設計款紅包袋 (4入)</div>
+        </div>
         <div class="grid-4">
-            <div class="grid-4-item">
-                <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包A" alt="紅包">
-                <div style="text-align:center; font-size:0.8rem; padding:5px;">款 A</div>
-            </div>
-            <div class="grid-4-item">
-                <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包B" alt="紅包">
-                <div style="text-align:center; font-size:0.8rem; padding:5px;">款 B</div>
-            </div>
-            <div class="grid-4-item">
-                <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包C" alt="紅包">
-                <div style="text-align:center; font-size:0.8rem; padding:5px;">款 C</div>
-            </div>
-            <div class="grid-4-item">
-                <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包D" alt="紅包">
-                <div style="text-align:center; font-size:0.8rem; padding:5px;">款 D</div>
-            </div>
+            <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包A" style="border-radius:8px;">
+            <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包B" style="border-radius:8px;">
+            <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包C" style="border-radius:8px;">
+            <img src="https://via.placeholder.com/200x300/aa0000/fff?text=紅包D" style="border-radius:8px;">
         </div>
     </div>
 
-</div>
+    <div style="height: 80px;"></div>
 
-<div class="fab-btn">立即選購</div>
+    <div class="fab">立即下單購買</div>
 
 </body>
 </html>
