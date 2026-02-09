@@ -1,408 +1,716 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紅薏米 | 兩岸文創</title>
-    <style>
-        /* =========================================
-           1. 核心設計風格 (源自第一版)
-           ========================================= */
-        :root {
-            --primary-red: #d32f2f;   /* 主紅色 */
-            --dark-red: #8e0000;      /* 深紅色 */
-            --gold: #ffb300;          /* 亮金色 */
-            --light-bg: #fffbf0;      /* 米黃宣紙底色 */
-            --text-color: #3e2723;    /* 深褐文字 */
-            --card-shadow: 0 4px 15px rgba(142, 0, 0, 0.08); /* 高級感陰影 */
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>紅義米｜新年限定・年貨專場</title>
+  <meta name="description" content="紅義米新年限定年貨專場。精選好物、限量禮盒、到店/宅配皆可。">
+  <style>
+    :root{
+      --bg:#070A0F;
+      --card:#0C1220;
+      --card2:#0A1020;
+      --line:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.62);
+      --soft:rgba(255,255,255,.12);
+      --gold:#D8C08B;
+      --gold2:#B99A5A;
+      --red:#B11B2B; /* 用很克制的紅 */
+      --ok:#35d07f;
+      --warn:#ffcc66;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(1200px 900px at 20% -10%, rgba(216,192,139,.16), transparent 55%),
+        radial-gradient(900px 900px at 90% 0%, rgba(177,27,43,.10), transparent 60%),
+        radial-gradient(900px 700px at 40% 110%, rgba(66,111,255,.12), transparent 55%),
+        linear-gradient(180deg, #05070C 0%, #060A13 40%, #05070C 100%);
+      color:var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{color:inherit;text-decoration:none}
+    .safe{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 96px}
+    .topbar{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,10,15,.88), rgba(7,10,15,.55));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .inner{max-width:980px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+    .brand{
+      display:flex;align-items:center;gap:10px;min-width:0;flex:1;
+    }
+    .logo{
+      width:36px;height:36px;border-radius:12px;
+      background:
+        radial-gradient(12px 12px at 25% 30%, rgba(255,255,255,.20), transparent 60%),
+        radial-gradient(24px 24px at 60% 70%, rgba(216,192,139,.28), transparent 60%),
+        linear-gradient(145deg, rgba(216,192,139,.22), rgba(177,27,43,.10));
+      border:1px solid rgba(216,192,139,.25);
+      box-shadow: 0 8px 20px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:""; position:absolute; inset:-40%;
+      background: conic-gradient(from 210deg, transparent 0 40%, rgba(216,192,139,.35) 50%, transparent 60% 100%);
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .brand .title{min-width:0}
+    .brand h1{margin:0;font-size:14px;letter-spacing:.4px}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:600;font-size:13px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:active{transform: translateY(1px) scale(.99)}
+    .btn.primary{
+      border-color: rgba(216,192,139,.35);
+      background:
+        radial-gradient(180px 80px at 20% 0%, rgba(216,192,139,.22), transparent 60%),
+        linear-gradient(145deg, rgba(216,192,139,.18), rgba(177,27,43,.10));
+    }
+    .btn.ghost{background:transparent;box-shadow:none}
+    .icon{
+      width:18px;height:18px;display:inline-block;opacity:.9
+    }
+    .hero{
+      margin-top:14px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(216,192,139,.18);
+      background:
+        radial-gradient(900px 300px at 10% 0%, rgba(216,192,139,.18), transparent 60%),
+        radial-gradient(500px 260px at 90% 10%, rgba(177,27,43,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:""; position:absolute; inset:-2px;
+      background:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.25), transparent 60%),
+        radial-gradient(2px 2px at 70% 60%, rgba(255,255,255,.18), transparent 60%),
+        radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.18), transparent 60%);
+      opacity:.55; pointer-events:none;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+    .hero .content{padding:18px 16px 16px;position:relative;z-index:1}
+    .kicker{
+      display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;
+      letter-spacing:.8px;text-transform:uppercase
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--gold);box-shadow:0 0 0 6px rgba(216,192,139,.12)}
+    .hero h2{margin:10px 0 6px;font-size:22px;letter-spacing:.4px}
+    .hero h2 span{color:var(--gold)}
+    .hero .sub{margin:0;color:var(--muted);line-height:1.5;font-size:13px}
+    .hero .row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .hero .tag{
+      padding:8px 10px;border-radius:999px;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      color:rgba(255,255,255,.78);
+      font-size:12px;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    .controls{margin:14px 2px 10px;display:flex;flex-direction:column;gap:10px}
+    .search{
+      display:flex;gap:10px;align-items:center;
+      padding:12px 12px;border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .search input{
+      flex:1;min-width:0;
+      background:transparent;border:0;outline:0;color:var(--text);
+      font-size:14px;
+    }
+    .search input::placeholder{color:rgba(255,255,255,.42)}
+    .chips{
+      display:flex;gap:8px;overflow:auto; padding-bottom:2px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chip{
+      flex:0 0 auto;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      transition: background .15s ease,border-color .15s ease;
+      user-select:none;
+    }
+    .chip.active{
+      border-color: rgba(216,192,139,.35);
+      background: rgba(216,192,139,.12);
+      color: rgba(255,255,255,.92);
+    }
 
-        body {
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            line-height: 1.5;
-            max-width: 480px; /* 手機版型限制 */
-            margin: 0 auto;
-            border-left: 1px solid #fdebd0;
-            border-right: 1px solid #fdebd0;
-            padding-bottom: 100px; /* 留給底部按鈕空間 */
-        }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (min-width:720px){
+      .grid{grid-template-columns: repeat(4, minmax(0, 1fr)); gap:12px;}
+      .wrap{padding:18px 14px 110px}
+      .hero h2{font-size:26px}
+    }
 
-        /* --- 頂部 Banner 設計 --- */
-        header {
-            background: linear-gradient(180deg, var(--primary-red) 0%, var(--dark-red) 100%);
-            color: #fff;
-            padding: 35px 20px 45px;
-            text-align: center;
-            position: relative;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 10;
-        }
+    .card{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+      overflow:hidden;
+      position:relative;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .card:active{transform: translateY(1px) scale(.995)}
+    .card:hover{border-color: rgba(216,192,139,.22)}
+    .thumb{
+      height:92px;
+      background:
+        radial-gradient(120px 80px at 20% 0%, rgba(216,192,139,.20), transparent 60%),
+        radial-gradient(120px 90px at 90% 40%, rgba(177,27,43,.12), transparent 60%),
+        linear-gradient(145deg, rgba(12,18,32,1), rgba(10,16,32,1));
+      border-bottom:1px solid var(--line);
+      position:relative;
+    }
+    .badge{
+      position:absolute; left:10px; top:10px;
+      padding:6px 8px;border-radius:999px;
+      font-size:11px;
+      border:1px solid rgba(216,192,139,.28);
+      background: rgba(216,192,139,.10);
+      color: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
+    }
+    .badge.hot{border-color: rgba(177,27,43,.32); background: rgba(177,27,43,.16)}
+    .badge.new{border-color: rgba(66,111,255,.35); background: rgba(66,111,255,.12)}
+    .thumb .spark{
+      position:absolute; right:10px; bottom:10px;
+      width:34px;height:34px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      display:grid;place-items:center;
+      box-shadow: 0 12px 26px rgba(0,0,0,.25);
+    }
+    .card .body{padding:10px 10px 12px}
+    .name{font-size:13px;font-weight:700;line-height:1.25;margin:0 0 6px}
+    .desc{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.35;min-height:32px}
+    .meta{display:flex;align-items:end;justify-content:space-between;gap:8px}
+    .price{display:flex;flex-direction:column;gap:2px}
+    .price b{font-size:14px;color:rgba(255,255,255,.95)}
+    .price s{font-size:11px;color:rgba(255,255,255,.35)}
+    .mini{
+      padding:9px 10px;border-radius:14px;
+      border:1px solid rgba(216,192,139,.22);
+      background: rgba(216,192,139,.10);
+      font-weight:800;font-size:12px;
+      white-space:nowrap;
+    }
 
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+    .bottombar{
+      position:fixed; left:0; right:0; bottom:0; z-index:40;
+      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, rgba(7,10,15,0), rgba(7,10,15,.85) 35%, rgba(7,10,15,.92));
+      border-top:1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .bottombar .inner{
+      max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;
+    }
+    .sum{
+      flex:1;min-width:0;
+      padding:10px 12px;border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .sum .t{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+    .sum .n{margin-top:2px;font-size:14px;font-weight:800;letter-spacing:.2px;display:flex;justify-content:space-between;gap:10px}
+    .cta{
+      min-width:120px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(216,192,139,.35);
+      background:
+        radial-gradient(240px 100px at 20% 0%, rgba(216,192,139,.24), transparent 60%),
+        linear-gradient(145deg, rgba(216,192,139,.16), rgba(177,27,43,.10));
+      font-weight:900;font-size:13px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--gold);
-            font-weight: bold;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
+    /* Cart Drawer */
+    .drawerOverlay{
+      position:fixed; inset:0; z-index:60;
+      background: rgba(0,0,0,.55);
+      opacity:0; pointer-events:none;
+      transition: opacity .18s ease;
+    }
+    .drawer{
+      position:fixed; left:0; right:0; bottom:-100%;
+      z-index:70;
+      background: linear-gradient(180deg, rgba(12,18,32,.98), rgba(7,10,15,.98));
+      border-top:1px solid rgba(216,192,139,.18);
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+      box-shadow: 0 -24px 60px rgba(0,0,0,.65);
+      transition: bottom .22s ease;
+      max-height: 78vh;
+      display:flex; flex-direction:column;
+    }
+    .drawer.open{bottom:0}
+    .drawerOverlay.open{opacity:1; pointer-events:auto}
+    .drawerHeader{
+      padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid var(--line);
+    }
+    .grab{
+      width:42px;height:4px;border-radius:99px;background:rgba(255,255,255,.18);
+      margin:6px auto 0;
+    }
+    .drawerHeader h3{margin:0;font-size:14px;letter-spacing:.3px}
+    .drawerBody{padding:12px 14px; overflow:auto}
+    .cartItem{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .cartThumb{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(30px 20px at 25% 15%, rgba(216,192,139,.20), transparent 60%),
+        radial-gradient(30px 24px at 80% 60%, rgba(177,27,43,.14), transparent 60%),
+        linear-gradient(145deg, rgba(12,18,32,1), rgba(10,16,32,1));
+      flex:0 0 auto;
+    }
+    .cartMain{flex:1; min-width:0}
+    .cartMain .n{font-size:13px;font-weight:800;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cartMain .m{font-size:12px;color:var(--muted);margin:0 0 8px}
+    .qtyRow{display:flex;align-items:center;gap:8px}
+    .qtyBtn{
+      width:34px;height:34px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:900;
+      display:grid;place-items:center;
+      user-select:none;
+    }
+    .qtyNum{min-width:26px;text-align:center;font-weight:900}
+    .cartPrice{font-weight:900;font-size:13px;white-space:nowrap}
+    .drawerFooter{
+      padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+      border-top:1px solid rgba(255,255,255,.07);
+      display:flex; gap:10px; align-items:center;
+    }
+    .payInfo{flex:1; min-width:0}
+    .payInfo .t{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+    .payInfo .n{margin-top:2px;font-size:16px;font-weight:1000;display:flex;justify-content:space-between}
+    .payBtn{
+      min-width:140px;
+      padding:12px 14px;border-radius:16px;
+      border:1px solid rgba(216,192,139,.35);
+      background:
+        radial-gradient(260px 120px at 20% 0%, rgba(216,192,139,.24), transparent 60%),
+        linear-gradient(145deg, rgba(216,192,139,.16), rgba(177,27,43,.10));
+      font-weight:1000;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      text-align:center;
+    }
+    .empty{
+      padding:18px 2px;color:var(--muted);font-size:13px;line-height:1.6;
+    }
 
-        .contact-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            padding: 6px 18px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- 雲紋裝飾 --- */
-        .cloud-border {
-            height: 14px;
-            background: radial-gradient(circle, var(--primary-red) 7px, transparent 8px);
-            background-size: 20px 20px;
-            margin-top: -14px;
-            position: relative;
-            z-index: 5;
-            opacity: 0.9;
-        }
-
-        main { padding: 25px 15px; }
-
-        /* --- 卡片通用樣式 (含動畫) --- */
-        .section-card {
-            background: #fff;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #fdebd0;
-            
-            /* 初始狀態：隱藏並下移 */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* 動畫觸發狀態 */
-        .section-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-header {
-            padding: 15px 20px;
-            border-bottom: 1px dashed #eee;
-            color: var(--dark-red);
-            font-weight: bold;
-            font-size: 1.05rem;
-            display: flex;
-            align-items: center;
-            background: #fffbf5;
-        }
-        
-        .card-header::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 16px;
-            background-color: var(--gold);
-            margin-right: 10px;
-            border-radius: 2px;
-        }
-
-        /* =========================================
-           2. 內容排版 (對應第二張圖的目錄結構)
-           ========================================= */
-        
-        /* 通用網格系統 */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 強制三欄 */
-            gap: 0;
-        }
-
-        .catalog-item {
-            padding: 20px 5px;
-            text-align: center;
-            border-right: 1px dashed #eee;
-            border-bottom: 1px dashed #eee;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100%;
-        }
-
-        /* 去除每行最後一個的右邊框 */
-        .catalog-item:nth-child(3n) { border-right: none; }
-        
-        /* 去除最後一行的底邊框 (視情況可選) */
-        .catalog-grid:last-child .catalog-item { border-bottom: 1px dashed #eee; }
-
-        .item-title {
-            font-size: 0.9rem;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 6px;
-            line-height: 1.4;
-        }
-
-        /* 產品類型標籤 (如：冰箱貼) */
-        .item-tag {
-            font-size: 0.75rem;
-            color: var(--primary-red);
-            background-color: #fff0f0;
-            padding: 3px 8px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        /* 針對方言T恤的特殊樣式 */
-        .dialect-container {
-            padding: 15px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .dialect-box {
-            background: #fcfcfc;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 12px 5px;
-            text-align: center;
-        }
-        .dialect-word {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: var(--dark-red);
-            margin-bottom: 4px;
-        }
-        .dialect-type {
-            font-size: 0.7rem;
-            color: #999;
-        }
-
-        /* --- 底部懸浮按鈕 (第一版樣式) --- */
-        .cta-bar {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 440px;
-            background: var(--dark-red);
-            color: var(--gold);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 25px;
-            border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(142, 0, 0, 0.4);
-            z-index: 100;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .cta-bar:active { transform: translateX(-50%) scale(0.98); }
-
-        .cta-btn {
-            background: var(--gold);
-            color: var(--dark-red);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-    </style>
+    /* Toast */
+    .toast{
+      position:fixed; left:50%; transform:translateX(-50%);
+      bottom:92px; z-index:90;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(12,18,32,.92);
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+      color:rgba(255,255,255,.90);
+      font-size:13px;
+      opacity:0; pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      backdrop-filter: blur(14px);
+      max-width:min(92vw, 520px);
+      text-align:center;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
+    .foot{
+      margin-top:16px;
+      color:rgba(255,255,255,.46);
+      font-size:12px;
+      text-align:center;
+    }
+  </style>
 </head>
-<body>
 
-    <header>
-        <h1>兩岸文創 潮玩未來</h1>
-        <div class="subtitle">- 紅薏米 文創產品 -</div>
-        <div class="contact-badge">
-            銷售/定制：135-17234133
+<body class="safe">
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="title">
+          <h1>紅義米｜新年限定</h1>
+          <p>年貨專場・精選 12+ 項・手機下單</p>
         </div>
-    </header>
-    <div class="cloud-border"></div>
+      </div>
 
-    <main>
-        
-        <div class="section-card scroll-reveal">
-            <div class="card-header">文創紀念系列</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-title">台灣光復<br>紀念日</span>
-                    <span class="item-tag">冰箱貼</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">台灣<br>文旦柚</span>
-                    <span class="item-tag">香薰蠟燭</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">火燒赤壁<br>桌遊</span>
-                    <span class="item-tag">紙牌</span>
-                </div>
-            </div>
-        </div>
+      <button class="btn ghost" id="openCartBtn" aria-label="開啟購物車">
+        <svg class="icon" viewBox="0 0 24 24" fill="none">
+          <path d="M6 7h15l-2 9H8L6 7Z" stroke="currentColor" stroke-width="1.6" />
+          <path d="M6 7 5 4H2" stroke="currentColor" stroke-width="1.6" />
+          <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
+          <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
+        </svg>
+        <span id="cartCountTop">0</span>
+      </button>
 
-        <div class="section-card scroll-reveal">
-            <div class="card-header">每一條路都是回家的路</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-title">回家的路<br>主題款</span>
-                    <span class="item-tag">帆布袋</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">回家的路<br>主題款</span>
-                    <span class="item-tag">冰箱貼</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">回家的路<br>主題款</span>
-                    <span class="item-tag">折扇</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">兩岸地標與故事</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-title">台北路的盡頭<br>是解放大道</span>
-                    <span class="item-tag">帆布袋</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">琴台<br>遇知音</span>
-                    <span class="item-tag">折扇</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">嘉慶君<br>遊台灣</span>
-                    <span class="item-tag">折扇</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">吉祥寓意與漢韻</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-title">金蟾招財<br>系列</span>
-                    <span class="item-tag">擺件</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">金蟾招財<br>系列</span>
-                    <span class="item-tag">抱枕</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-title">漢劇<br>漢韻</span>
-                    <span class="item-tag">絲巾</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">武漢方言系列</div>
-            <div class="dialect-container">
-                <div class="dialect-box">
-                    <div class="dialect-word">吧唧</div>
-                    <div class="dialect-type">武漢方言</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">蒜鳥</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">虛狐</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">裹鯨</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">搞磨獅</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">撮蝦子</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">尖板眼</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-                <div class="dialect-box">
-                    <div class="dialect-word">信了你的邪</div>
-                    <div class="dialect-type">T恤</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">產品實拍預覽</div>
-            <img src="https://images.unsplash.com/photo-1548676239-16a760b21394?q=80&w=800&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; display:block;" alt="帆布袋實拍">
-        </div>
-
-        <p style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 30px;">
-            © 紅薏米文創 All Rights Reserved.
-        </p>
-
-    </main>
-
-    <div class="cta-bar">
-        <div class="cta-text">
-            <span>諮詢熱線: </span>
-            <span style="font-size: 1.1rem; font-weight:bold;">135-17234133</span>
-        </div>
-        <div class="cta-btn">立即聯繫</div>
+      <a class="btn primary" href="#products">
+        <svg class="icon" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 20h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        立即選購
+      </a>
     </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 設定觀察器選項
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1 // 當元素出現 10% 時觸發
-            };
+  <div class="wrap">
+    <section class="hero">
+      <div class="content">
+        <div class="kicker"><span class="dot"></span> LIMITED NEW YEAR DROP</div>
+        <h2>把「年味」做成 <span>更高級</span> 的一頁</h2>
+        <p class="sub">不走大紅大金俗套。以暗夜質感 + 低飽和金紅點綴，適合手機快速瀏覽、下單與轉發。</p>
+        <div class="row">
+          <span class="tag">限量禮盒</span>
+          <span class="tag">到店 / 宅配</span>
+          <span class="tag">企業採購</span>
+          <span class="tag">會員折扣</span>
+        </div>
+      </div>
+    </section>
 
-            // 建立觀察器
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible'); // 加入 visible class 啟動 CSS 動畫
-                        // observer.unobserve(entry.target); // 如果希望動畫只播一次，可以取消註解這行
-                    }
-                });
-            }, observerOptions);
+    <section class="controls" id="products">
+      <div class="search">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input id="q" type="search" placeholder="搜尋：禮盒／米／醬／零食／茶…" autocomplete="off" />
+        <button class="btn ghost" id="clearQ" type="button">清除</button>
+      </div>
 
-            // 選取所有帶有 scroll-reveal class 的元素
-            const elements = document.querySelectorAll('.scroll-reveal');
-            elements.forEach(el => observer.observe(el));
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <div class="foot">© <span id="year"></span> 紅義米 Hong Yi Mi. All rights reserved.</div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottombar">
+    <div class="inner">
+      <div class="sum">
+        <div class="t">
+          <span>購物車</span>
+          <span id="miniCount">0 件</span>
+        </div>
+        <div class="n">
+          <span>合計</span>
+          <span id="miniTotal">$0</span>
+        </div>
+      </div>
+      <button class="cta" id="checkoutBtn">前往結帳</button>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawerOverlay" id="overlay"></div>
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="購物車">
+    <div class="grab" aria-hidden="true"></div>
+    <div class="drawerHeader">
+      <h3>購物車</h3>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="btn ghost" id="clearCartBtn">清空</button>
+        <button class="btn" id="closeCartBtn">關閉</button>
+      </div>
+    </div>
+    <div class="drawerBody" id="cartList"></div>
+    <div class="drawerFooter">
+      <div class="payInfo">
+        <div class="t"><span>商品小計</span><span id="subTotal">$0</span></div>
+        <div class="n"><span>應付</span><span id="grandTotal">$0</span></div>
+      </div>
+      <a class="payBtn" href="javascript:void(0)" id="payBtn">立即下單</a>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ====== 可自行改：公司名、活動名、商品內容 ======
+    const CURRENCY = "$"; // 需要改成 NT$/RMB 都可
+    const categories = ["全部","禮盒","主食","醬料","零食","茶飲","周邊"];
+
+    const products = [
+      {id:"p01", name:"新年典藏禮盒", desc:"低糖、低油、送禮不俗。含 6 款精選。", price:999, compareAt:1299, cat:"禮盒", badge:"HOT"},
+      {id:"p02", name:"紅義米・上選香米 2kg", desc:"顆粒飽滿，香氣乾淨。日常必備。", price:299, compareAt:360, cat:"主食", badge:"NEW"},
+      {id:"p03", name:"富貴堅果禮袋", desc:"綜合堅果 + 果乾，口感層次乾淨。", price:499, compareAt:620, cat:"零食"},
+      {id:"p04", name:"松露椒麻醬", desc:"香麻不嗆，拌麵/拌飯一匙到位。", price:380, compareAt:450, cat:"醬料", badge:"HOT"},
+      {id:"p05", name:"XO 干貝醬", desc:"鮮味乾淨、餘韻長。炒飯神器。", price:520, compareAt:620, cat:"醬料"},
+      {id:"p06", name:"黑糖桂圓茶", desc:"暖甜不膩，冷泡/熱沖皆可。", price:320, compareAt:390, cat:"茶飲"},
+      {id:"p07", name:"手工牛肉乾 150g", desc:"薄切回甘，越嚼越香。", price:450, compareAt:520, cat:"零食"},
+      {id:"p08", name:"臘味香腸 500g", desc:"油脂比例克制，香氣更乾淨。", price:350, compareAt:420, cat:"主食"},
+      {id:"p09", name:"福氣米餅盒", desc:"輕脆不油。適合親友聚會分享。", price:260, compareAt:320, cat:"零食"},
+      {id:"p10", name:"年節小點綜合", desc:"酥、脆、甜比例做得更高級。", price:880, compareAt:999, cat:"禮盒"},
+      {id:"p11", name:"品牌紅金禮袋", desc:"霧面質感，送禮更完整。", price:60, compareAt:80, cat:"周邊"},
+      {id:"p12", name:"新年限定貼紙組", desc:"黑金質感、局部燙金風格。", price:39, compareAt:59, cat:"周邊", badge:"NEW"},
+      {id:"p13", name:"米香脆片 3 入", desc:"淡甜不膩，適合辦公室零嘴。", price:189, compareAt:220, cat:"零食"},
+      {id:"p14", name:"紅義米・糙米 2kg", desc:"口感更有咀嚼感，健康取向。", price:339, compareAt:399, cat:"主食"},
+    ];
+
+    // ====== State ======
+    let state = {
+      cat: "全部",
+      q: "",
+      cart: new Map() // id -> qty
+    };
+
+    // ====== Helpers ======
+    const $ = (sel, el=document)=>el.querySelector(sel);
+    const $$ = (sel, el=document)=>Array.from(el.querySelectorAll(sel));
+    const money = (n)=>`${CURRENCY}${n.toLocaleString("zh-Hant")}`;
+    const sumCartQty = ()=>Array.from(state.cart.values()).reduce((a,b)=>a+b,0);
+    const cartItems = ()=>Array.from(state.cart.entries()).map(([id,qty])=>{
+      const p = products.find(x=>x.id===id);
+      return {p, qty, line: (p?.price||0)*qty};
+    }).filter(x=>x.p);
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toast._tm);
+      toast._tm = setTimeout(()=>t.classList.remove("show"), 1400);
+    }
+
+    function setCart(id, qty){
+      if(qty<=0) state.cart.delete(id);
+      else state.cart.set(id, qty);
+      renderCart();
+      renderBottom();
+    }
+
+    // ====== UI Render ======
+    function renderChips(){
+      const chips = $("#chips");
+      chips.innerHTML = categories.map(c => `
+        <button class="chip ${state.cat===c?'active':''}" data-cat="${c}">${c}</button>
+      `).join("");
+      $$(".chip", chips).forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          state.cat = btn.dataset.cat;
+          renderChips();
+          renderGrid();
         });
-    </script>
+      });
+    }
+
+    function badgeHTML(b){
+      if(!b) return "";
+      const cls = b==="HOT" ? "hot" : (b==="NEW" ? "new" : "");
+      const label = b==="HOT" ? "熱銷" : (b==="NEW" ? "新品" : b);
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+
+    function renderGrid(){
+      const grid = $("#grid");
+      const q = state.q.trim().toLowerCase();
+      const list = products.filter(p=>{
+        const inCat = state.cat==="全部" ? true : p.cat===state.cat;
+        const inQ = !q ? true : (p.name+p.desc+p.cat).toLowerCase().includes(q);
+        return inCat && inQ;
+      });
+
+      grid.innerHTML = list.map(p=>{
+        const qtyInCart = state.cart.get(p.id) || 0;
+        return `
+          <article class="card" data-id="${p.id}">
+            <div class="thumb">
+              ${badgeHTML(p.badge)}
+              <div class="spark" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6Z" stroke="rgba(255,255,255,.88)" stroke-width="1.6" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="body">
+              <p class="name">${p.name}</p>
+              <p class="desc">${p.desc}</p>
+              <div class="meta">
+                <div class="price">
+                  <b>${money(p.price)}</b>
+                  ${p.compareAt ? `<s>${money(p.compareAt)}</s>` : `<span style="height:13px"></span>`}
+                </div>
+                <button class="mini" data-add="${p.id}">
+                  ${qtyInCart ? `已加 ${qtyInCart}` : "加入"}
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      $$("[data-add]", grid).forEach(btn=>{
+        btn.addEventListener("click", (e)=>{
+          e.stopPropagation();
+          const id = btn.dataset.add;
+          const cur = state.cart.get(id) || 0;
+          setCart(id, cur + 1);
+          toast("已加入購物車");
+          renderGrid(); // 更新「已加 x」
+        });
+      });
+    }
+
+    function renderBottom(){
+      const items = cartItems();
+      const qty = sumCartQty();
+      const total = items.reduce((a,b)=>a+b.line,0);
+
+      $("#miniCount").textContent = `${qty} 件`;
+      $("#miniTotal").textContent = money(total);
+      $("#cartCountTop").textContent = qty;
+
+      $("#subTotal").textContent = money(total);
+      $("#grandTotal").textContent = money(total);
+    }
+
+    function renderCart(){
+      const list = $("#cartList");
+      const items = cartItems();
+      if(!items.length){
+        list.innerHTML = `<div class="empty">購物車目前是空的。<br/>挑幾樣年貨，整頁質感就完整了。</div>`;
+        renderBottom();
+        return;
+      }
+      list.innerHTML = items.map(({p,qty,line})=>`
+        <div class="cartItem" data-id="${p.id}">
+          <div class="cartThumb" aria-hidden="true"></div>
+          <div class="cartMain">
+            <p class="n">${p.name}</p>
+            <p class="m">${p.cat}｜${money(p.price)} / 件</p>
+            <div class="qtyRow">
+              <button class="qtyBtn" data-dec="${p.id}">−</button>
+              <div class="qtyNum">${qty}</div>
+              <button class="qtyBtn" data-inc="${p.id}">＋</button>
+            </div>
+          </div>
+          <div class="cartPrice">${money(line)}</div>
+        </div>
+      `).join("");
+
+      $$("[data-dec]", list).forEach(b=>{
+        b.addEventListener("click", ()=>{
+          const id=b.dataset.dec; setCart(id, (state.cart.get(id)||0) - 1);
+          renderGrid();
+        });
+      });
+      $$("[data-inc]", list).forEach(b=>{
+        b.addEventListener("click", ()=>{
+          const id=b.dataset.inc; setCart(id, (state.cart.get(id)||0) + 1);
+          renderGrid();
+        });
+      });
+
+      renderBottom();
+    }
+
+    // ====== Drawer Control ======
+    const overlay = $("#overlay");
+    const drawer = $("#drawer");
+    function openDrawer(){
+      overlay.classList.add("open");
+      drawer.classList.add("open");
+      document.body.style.overflow="hidden";
+      renderCart();
+    }
+    function closeDrawer(){
+      overlay.classList.remove("open");
+      drawer.classList.remove("open");
+      document.body.style.overflow="";
+    }
+
+    // ====== Events ======
+    $("#openCartBtn").addEventListener("click", openDrawer);
+    $("#checkoutBtn").addEventListener("click", openDrawer);
+    $("#closeCartBtn").addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    $("#clearCartBtn").addEventListener("click", ()=>{
+      state.cart.clear();
+      renderCart(); renderGrid();
+      toast("已清空購物車");
+    });
+
+    $("#q").addEventListener("input", (e)=>{
+      state.q = e.target.value || "";
+      renderGrid();
+    });
+    $("#clearQ").addEventListener("click", ()=>{
+      state.q = "";
+      $("#q").value = "";
+      renderGrid();
+    });
+
+    $("#payBtn").addEventListener("click", ()=>{
+      const qty = sumCartQty();
+      if(!qty){ toast("購物車是空的"); return; }
+      // 這裡改成你的實際下單流程：跳轉付款頁 / 表單 / 小程序 / LINE / WhatsApp 等
+      const total = cartItems().reduce((a,b)=>a+b.line,0);
+      toast(`已建立訂單（示範）｜${qty} 件｜${money(total)}`);
+    });
+
+    // ====== Init ======
+    $("#year").textContent = new Date().getFullYear();
+    renderChips();
+    renderGrid();
+    renderCart();
+    renderBottom();
+  </script>
 </body>
 </html>
