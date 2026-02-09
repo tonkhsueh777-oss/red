@@ -1,108 +1,426 @@
-<section class="py-20 z-10 max-w-lg mx-auto px-6">
-        <div class="mb-10 text-center">
-            <span class="text-rouge text-xs tracking-[0.5em] uppercase">Cross-Strait</span>
-            <h3 class="font-serif text-3xl text-ink mt-2">兩岸 · 歸鄉</h3>
-            <div class="w-12 h-1 bg-ink mx-auto mt-4"></div>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紅薏米 | 兩岸文創 潮玩未來</title>
+    <style>
+        /* --- 基礎設定 (Reset & Variables) --- */
+        :root {
+            --primary-red: #B83B32; /* 故宮紅 */
+            --bg-beige: #F7F5F0;   /* 米宣紙色 */
+            --text-dark: #2C2C2C;  /* 濃墨黑 */
+            --text-grey: #666666;
+            --border-color: #E0D8C8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: "PingFang TC", "Noto Serif TC", "Songti TC", serif;
+            background-color: #f0f0f0; /* 瀏覽器背景 */
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* 模擬手機容器 */
+        .mobile-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: var(--bg-beige);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 80px; /* 給底部浮動欄留空間 */
+        }
+
+        /* --- 1. Header & Hero --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px; /* 對應 IMG_01 高度 */
+            background-color: var(--primary-red);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+        
+        /* 圖片佔位符 (生成圖片後請替換 img src) */
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8; /* 讓文字更清楚 */
+        }
+
+        .hero-text {
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            writing-mode: vertical-rl; /* 豎排文字更有文化感 */
+            text-orientation: upright;
+            margin: 0 auto;
+            height: 300px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-red);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 4px;
+        }
+
+        /* --- 通用標題樣式 --- */
+        .section-title {
+            text-align: center;
+            padding: 40px 0 20px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            display: inline-block;
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 5px;
+        }
+
+        /* --- 2. 熱門推薦 (Grid) --- */
+        .grid-section {
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 兩列排版 */
+            gap: 15px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .product-card:active {
+            transform: scale(0.98);
+        }
+
+        .card-img-box {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #eee;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .card-sub {
+            font-size: 0.8rem;
+            color: var(--text-grey);
+        }
+
+        /* --- 3. 系列主題 (Horizontal Scroll) --- */
+        .scroll-section {
+            padding: 20px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            padding-left: 15px;
+        }
+
+        .scroll-card {
+            display: inline-block;
+            width: 200px;
+            margin-right: 15px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            vertical-align: top;
+        }
+
+        .scroll-img-box {
+            width: 100%;
+            height: 250px;
+            background: #ddd;
+        }
+
+        .scroll-info {
+            padding: 10px;
+            white-space: normal; /* 讓文字換行 */
+        }
+
+        /* --- 4. 文化單品 (List View) --- */
+        .list-item {
+            display: flex;
+            background: #fff;
+            margin: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        .list-img {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            border-radius: 4px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .list-text {
+            padding-left: 15px;
+            flex-grow: 1;
+        }
+
+        /* --- 5. 武漢方言 (Feature) --- */
+        .dialect-section {
+            background: var(--text-dark);
+            color: #fff;
+            padding: 30px 15px;
+            margin-top: 30px;
+        }
+
+        .dialect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #555;
+            font-size: 0.9rem;
+        }
+        
+        .big-img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        /* --- Footer Sticky Bar --- */
+        .sticky-footer {
+            position: absolute; /* 在 mobile-container 內絕對定位 */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            position: fixed; /* 固定在螢幕底部 */
+            max-width: 480px; /* 配合容器寬度 */
+            bottom: 0;
+            z-index: 100;
+        }
+
+        .cta-btn {
+            background: var(--primary-red);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: center;
+            margin-left: 10px;
+            box-shadow: 0 4px 10px rgba(184, 59, 50, 0.3);
+        }
+
+        .brand-icon {
+            font-size: 0.8rem;
+            color: var(--text-grey);
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="mobile-container">
+
+    <header class="hero-section">
+        <img src="https://placehold.co/1080x1440/B83B32/FFFFFF?text=Hero+Image" alt="兩岸文創" class="hero-img">
+        <div class="hero-text">
+            <h1 class="hero-title">兩岸文創<br>潮玩未來</h1>
+            <div class="hero-subtitle">紅薏米 文創產品</div>
         </div>
+    </header>
 
-        <div class="bg-white rounded-xl overflow-hidden shadow-lg gs-reveal">
-            <div class="relative h-80">
-                <img src="https://images.unsplash.com/photo-1597484661643-2f6f332063f3?q=80&w=1887&auto=format&fit=crop" 
-                     class="w-full h-full object-cover" alt="帆布袋示意圖">
-                <div class="absolute bottom-6 left-6 text-white drop-shadow-md">
-                    <h4 class="font-serif text-2xl font-bold">每一條路</h4>
-                    <p class="text-sm opacity-90">都是回家的路</p>
-                </div>
-            </div>
-            <div class="p-6 flex justify-between items-center">
-                <div>
-                    <h5 class="font-bold text-ink">台北路帆布袋</h5>
-                    <p class="text-xs text-stone mt-1">兩岸文創系列</p>
-                </div>
-                <button class="bg-ink text-white px-4 py-2 text-xs rounded-full">¥ 49.00</button>
-            </div>
-        </div>
+    <div class="section-title">
+        <h2>好物推薦</h2>
+        <p style="font-size: 0.8rem; margin-top: 5px; color:#999;">兩岸文化 精選禮品</p>
+    </div>
 
-        <div class="grid grid-cols-2 gap-4 mt-6">
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center gs-reveal">
-                <div class="h-32 bg-gray-100 mb-3 rounded-md overflow-hidden relative">
-                    <img src="https://plus.unsplash.com/premium_photo-1664302152996-3398453401eb?q=80&w=1922&auto=format&fit=crop" class="object-cover w-full h-full">
-                    <span class="absolute top-2 left-2 bg-rouge text-white text-[10px] px-2 py-0.5 rounded">熱銷</span>
-                </div>
-                <h4 class="font-serif text-sm font-bold">光復紀念冰箱貼</h4>
-                <p class="text-rouge text-xs mt-1 font-bold">¥ 25.00</p>
+    <div class="grid-section">
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Pomelo+Candle" class="card-img" alt="香薰蠟燭">
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm text-center gs-reveal">
-                <div class="h-32 bg-gray-100 mb-3 rounded-md overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=1887&auto=format&fit=crop" class="object-cover w-full h-full">
-                </div>
-                <h4 class="font-serif text-sm font-bold">台灣文旦柚香薰</h4>
-                <p class="text-rouge text-xs mt-1 font-bold">¥ 68.00</p>
+            <div class="card-info">
+                <h3 class="card-title">台灣文旦柚</h3>
+                <p class="card-sub">香薰蠟燭</p>
             </div>
         </div>
-    </section>
-
-    <section class="py-20 bg-ink text-paper z-10 overflow-hidden">
-        <div class="px-6 mb-8 flex items-end justify-between">
-            <div>
-                <h3 class="font-serif text-3xl text-white">江湖 · 武漢</h3>
-                <p class="text-xs text-white/50 mt-2 tracking-widest">WUHAN DIALECT T-SHIRTS</p>
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Red+Cliff+Game" class="card-img" alt="桌遊紙牌">
             </div>
-            <i class="fa-solid fa-arrow-right text-white/30 animate-pulse"></i>
+            <div class="card-info">
+                <h3 class="card-title">火燒赤壁桌遊</h3>
+                <p class="card-sub">紙牌</p>
+            </div>
         </div>
-
-        <div class="flex overflow-x-auto hide-scrollbar px-6 space-x-4 pb-12 snap-x">
-            
-            <div class="min-w-[220px] snap-center group cursor-pointer">
-                <div class="h-[280px] bg-white rounded-lg overflow-hidden relative border-4 border-white transition-all duration-300 group-hover:border-rouge">
-                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1780&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-2xl font-bold tracking-widest text-white">裹鯨</span>
-                    </div>
-                </div>
-                <div class="mt-4 text-center">
-                    <h4 class="text-lg font-bold">武漢方言「裹鯨」</h4>
-                    <p class="text-rouge text-sm">¥ 88.00</p>
-                </div>
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Fridge+Magnet" class="card-img" alt="冰箱貼">
             </div>
-
-            <div class="min-w-[220px] snap-center group cursor-pointer">
-                <div class="h-[280px] bg-white rounded-lg overflow-hidden relative border-4 border-white transition-all duration-300 group-hover:border-rouge">
-                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1887&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-2xl font-bold tracking-widest text-white">信了你的邪</span>
-                    </div>
-                </div>
-                <div class="mt-4 text-center">
-                    <h4 class="text-lg font-bold">方言「信了你的邪」</h4>
-                    <p class="text-rouge text-sm">¥ 88.00</p>
-                </div>
+            <div class="card-info">
+                <h3 class="card-title">光復紀念日</h3>
+                <p class="card-sub">冰箱貼</p>
             </div>
-
-            <div class="min-w-[220px] snap-center group cursor-pointer">
-                <div class="h-[280px] bg-white rounded-lg overflow-hidden relative border-4 border-white transition-all duration-300 group-hover:border-rouge">
-                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1964&auto=format&fit=crop" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-2xl font-bold tracking-widest text-white">撮蝦子</span>
-                    </div>
-                </div>
-                <div class="mt-4 text-center">
-                    <h4 class="text-lg font-bold">方言「撮蝦子」</h4>
-                    <p class="text-rouge text-sm">¥ 88.00</p>
-                </div>
-            </div>
-
         </div>
-    </section>
-
-    <section class="py-16 px-6 max-w-lg mx-auto">
-        <div class="bg-rouge rounded-2xl p-8 text-center text-white relative overflow-hidden shadow-2xl">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
-            <h3 class="font-serif text-2xl font-bold relative z-10 mb-2">企業定制 / 批量採購</h3>
-            <p class="text-sm opacity-80 mb-6 relative z-10">承接文創產品設計與開發</p>
-            <a href="tel:13517234133" class="inline-block bg-white text-rouge font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-transform relative z-10">
-                <i class="fa-solid fa-phone mr-2"></i> 135-1723-4133
-            </a>
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Badge" class="card-img" alt="吧唧">
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">武漢方言</h3>
+                <p class="card-sub">吧唧 / 徽章</p>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <div class="section-title">
+        <h2>每一條路 都是回家的路</h2>
+    </div>
     
+    <div class="scroll-section">
+        <div class="scroll-card">
+            <div class="scroll-img-box">
+                <img src="https://placehold.co/800x1000/EEE/999?text=Tote+Bag" class="card-img">
+            </div>
+            <div class="scroll-info">
+                <h3 class="card-title">回家路帆布袋</h3>
+                <p class="card-sub">溫暖手感 堅韌耐用</p>
+            </div>
+        </div>
+        <div class="scroll-card">
+            <div class="scroll-img-box">
+                <img src="https://placehold.co/800x1000/EEE/999?text=Fan" class="card-img">
+            </div>
+            <div class="scroll-info">
+                <h3 class="card-title">回家路折扇</h3>
+                <p class="card-sub">清風徐來 思鄉情懷</p>
+            </div>
+        </div>
+        <div class="scroll-card">
+            <div class="scroll-img-box">
+                <img src="https://placehold.co/800x1000/EEE/999?text=Taipei+Road" class="card-img">
+            </div>
+            <div class="scroll-info">
+                <h3 class="card-title">台北路帆布袋</h3>
+                <p class="card-sub">解放大道 兩岸連結</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 0 15px;">
+        <div class="list-item">
+            <img src="https://placehold.co/800x600/EEE/999?text=History+Fan" class="list-img">
+            <div class="list-text">
+                <h3 class="card-title">嘉慶君遊台灣 / 琴台遇知音</h3>
+                <p class="card-sub">經典折扇系列</p>
+            </div>
+        </div>
+        
+        <div class="list-item">
+            <img src="https://placehold.co/800x600/EEE/999?text=Jin+Chan" class="list-img">
+            <div class="list-text">
+                <h3 class="card-title">金蟾招財</h3>
+                <p class="card-sub">居家擺件 / 舒適抱枕</p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <img src="https://placehold.co/800x600/EEE/999?text=Silk+Scarf" class="list-img">
+            <div class="list-text">
+                <h3 class="card-title">漢劇漢韻</h3>
+                <p class="card-sub">國風絲巾</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialect-section">
+        <h2 style="text-align: center; border-bottom: 1px solid #555; padding-bottom: 10px; margin-bottom: 20px;">武漢方言 Ｘ 國潮 T恤</h2>
+        
+        <img src="https://placehold.co/1080x800/333/FFF?text=Wuhan+Dialect+T-Shirts" class="big-img">
+
+        <div class="dialect-grid">
+            <div class="tag">蒜鳥</div>
+            <div class="tag">虛狐</div>
+            <div class="tag">裹鯨</div>
+            <div class="tag">搞磨獅</div>
+            <div class="tag">撮蝦子</div>
+            <div class="tag">尖板眼</div>
+            <div class="tag">信了你的邪</div>
+            <div class="tag" style="background:var(--primary-red); border:none;">熱銷中</div>
+            <div class="tag" style="background:var(--primary-red); border:none;">訂製</div>
+        </div>
+    </div>
+
+    <div style="height: 50px; text-align: center; padding-top: 20px; color: #999; font-size: 0.8rem;">
+        &copy; 2026 紅薏米文創產品
+    </div>
+
+    <div class="sticky-footer">
+        <div class="brand-icon">
+            <div style="font-weight:bold; color:#333;">紅薏米</div>
+            <div>文創</div>
+        </div>
+        <a href="tel:13517234133" class="cta-btn">
+            銷售/定制：135-17234133
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
