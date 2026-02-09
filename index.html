@@ -123,6 +123,7 @@
             width: 100%;
             aspect-ratio: 1/1;
             background: #eee;
+            position: relative;
         }
 
         .card-img {
@@ -166,11 +167,10 @@
         .dialect-section {
             background: var(--text-dark);
             color: #fff;
-            padding: 30px 0; /* 左右不留白，讓輪播滿版 */
+            padding: 30px 0; 
             margin-top: 10px;
         }
 
-        /* 輪播容器 */
         .carousel-container {
             width: 100%;
             overflow: hidden;
@@ -178,22 +178,20 @@
             margin-bottom: 15px;
         }
 
-        /* 輪播軌道 */
         .carousel-track {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory; /* 強制對齊 */
+            scroll-snap-type: x mandatory; 
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* 隱藏滾動條 */
+            scrollbar-width: none; 
         }
         .carousel-track::-webkit-scrollbar {
             display: none;
         }
 
-        /* 輪播單項 */
         .carousel-item {
-            flex: 0 0 100%; /* 每個佔滿 100% 寬度 */
+            flex: 0 0 100%; 
             scroll-snap-align: center;
             position: relative;
             text-align: center;
@@ -201,7 +199,7 @@
 
         .carousel-img {
             width: 100%;
-            max-width: 400px; /* 限制最大寬度以免太糊 */
+            max-width: 400px; 
             height: auto;
             border-radius: 4px;
             margin: 0 auto;
@@ -215,13 +213,12 @@
             color: #f0f0f0;
         }
 
-        /* 方言按鈕區 */
         .dialect-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 20px;
-            padding: 0 15px; /* 按鈕區要有邊距 */
+            padding: 0 15px; 
         }
 
         .tag-btn {
@@ -278,7 +275,7 @@
 <div class="mobile-container">
 
     <header class="hero-section">
-        <img src="https://placehold.co/1080x1440/B83B32/FFFFFF?text=Hero+Image" class="hero-img">
+        <img src="images/hero-banner.jpg" alt="兩岸文創" class="hero-img">
         <div class="hero-text">
             <h1 class="hero-title">兩岸文創<br>潮玩未來</h1>
             <div class="hero-subtitle">紅薏米 文創產品</div>
@@ -292,7 +289,7 @@
 
     <div class="grid-section">
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Pomelo" class="card-img"></div>
+            <div class="card-img-box"><img src="images/hot-pomelo.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">台灣文旦柚</h3>
                 <p class="card-sub">香薰蠟燭</p>
@@ -300,7 +297,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Red+Cliff" class="card-img"></div>
+            <div class="card-img-box"><img src="images/hot-redcliff.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">火燒赤壁桌遊</h3>
                 <p class="card-sub">紙牌</p>
@@ -308,7 +305,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Magnet" class="card-img"></div>
+            <div class="card-img-box"><img src="images/hot-magnet.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">光復紀念日</h3>
                 <p class="card-sub">冰箱貼</p>
@@ -316,7 +313,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Badge" class="card-img"></div>
+            <div class="card-img-box"><img src="images/hot-badge.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">武漢方言</h3>
                 <p class="card-sub">吧唧 / 徽章</p>
@@ -332,7 +329,7 @@
     
     <div class="grid-section">
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Tote+Bag" class="card-img"></div>
+            <div class="card-img-box"><img src="images/series-tote.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">回家路帆布袋</h3>
                 <p class="card-sub">原創設計</p>
@@ -340,7 +337,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Fan" class="card-img"></div>
+            <div class="card-img-box"><img src="images/series-fan.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">回家路折扇</h3>
                 <p class="card-sub">清風徐來</p>
@@ -348,7 +345,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Taipei+Road" class="card-img"></div>
+            <div class="card-img-box"><img src="images/series-taipei.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">台北路帆布袋</h3>
                 <p class="card-sub">解放大道</p>
@@ -356,7 +353,7 @@
             </div>
         </div>
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Magnet+2" class="card-img"></div>
+            <div class="card-img-box"><img src="images/series-magnet2.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">回家路冰箱貼</h3>
                 <p class="card-sub">紀念小物</p>
@@ -372,7 +369,7 @@
     
     <div class="grid-section">
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=History" class="card-img"></div>
+            <div class="card-img-box"><img src="images/culture-jiaqing.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">嘉慶君遊台灣</h3>
                 <p class="card-sub">經典折扇</p>
@@ -381,7 +378,7 @@
         </div>
         
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Qin+Tai" class="card-img"></div>
+            <div class="card-img-box"><img src="images/culture-qintai.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">琴台遇知音</h3>
                 <p class="card-sub">經典折扇</p>
@@ -390,7 +387,7 @@
         </div>
 
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Jin+Chan" class="card-img"></div>
+            <div class="card-img-box"><img src="images/culture-jinchan.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">金蟾招財</h3>
                 <p class="card-sub">居家擺件 / 抱枕</p>
@@ -399,7 +396,7 @@
         </div>
 
         <div class="product-card">
-            <div class="card-img-box"><img src="https://placehold.co/800x800/EEE/999?text=Scarf" class="card-img"></div>
+            <div class="card-img-box"><img src="images/culture-scarf.jpg" class="card-img"></div>
             <div class="card-info">
                 <h3 class="card-title">漢劇漢韻</h3>
                 <p class="card-sub">國風絲巾</p>
@@ -414,31 +411,31 @@
         <div class="carousel-container">
             <div class="carousel-track" id="dialectCarousel">
                 <div class="carousel-item" id="slide-0">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Suan+Niao+(Bird)" class="carousel-img">
+                    <img src="images/tshirt-01.jpg" class="carousel-img">
                     <div class="carousel-caption">蒜鳥 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-1">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Xu+Hu+(Fox)" class="carousel-img">
+                    <img src="images/tshirt-02.jpg" class="carousel-img">
                     <div class="carousel-caption">虛狐 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-2">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Guo+Jing+(Whale)" class="carousel-img">
+                    <img src="images/tshirt-03.jpg" class="carousel-img">
                     <div class="carousel-caption">裹鯨 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-3">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Gao+Mo+Shi+(Lion)" class="carousel-img">
+                    <img src="images/tshirt-04.jpg" class="carousel-img">
                     <div class="carousel-caption">搞磨獅 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-4">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Cuo+Xia+Zi+(Crayfish)" class="carousel-img">
+                    <img src="images/tshirt-05.jpg" class="carousel-img">
                     <div class="carousel-caption">撮蝦子 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-5">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Jian+Ban+Yan" class="carousel-img">
+                    <img src="images/tshirt-06.jpg" class="carousel-img">
                     <div class="carousel-caption">尖板眼 T恤</div>
                 </div>
                 <div class="carousel-item" id="slide-6">
-                    <img src="https://placehold.co/800x800/333/FFF?text=Xin+Le+Ni+De+Xie" class="carousel-img">
+                    <img src="images/tshirt-07.jpg" class="carousel-img">
                     <div class="carousel-caption">信了你的邪 T恤</div>
                 </div>
             </div>
@@ -477,7 +474,7 @@
 <script>
     const track = document.getElementById('dialectCarousel');
     let scrollAmount = 0;
-    let slideWidth = track.offsetWidth; // 獲取單個幻燈片寬度
+    let slideWidth = track.offsetWidth; 
     let currentSlide = 0;
     const totalSlides = 7;
     let autoPlayInterval;
@@ -491,7 +488,7 @@
             left: slide.offsetLeft,
             behavior: 'smooth'
         });
-        resetTimer(); // 點擊後重置計時器
+        resetTimer(); 
     }
 
     // 自動播放邏輯
@@ -500,11 +497,11 @@
             if(!isPaused) {
                 currentSlide++;
                 if (currentSlide >= totalSlides) {
-                    currentSlide = 0; // 回到第一張
+                    currentSlide = 0; 
                 }
                 scrollToSlide(currentSlide);
             }
-        }, 3000); // 每 3 秒換一張
+        }, 3000); 
     }
 
     function resetTimer() {
@@ -512,16 +509,14 @@
         startAutoPlay();
     }
 
-    // 當用戶觸摸時暫停自動播放，避免打架
+    // 當用戶觸摸時暫停自動播放
     track.addEventListener('touchstart', () => { isPaused = true; });
     track.addEventListener('touchend', () => { 
         setTimeout(() => { isPaused = false; resetTimer(); }, 2000); 
     });
 
-    // 啟動自動播放
     startAutoPlay();
     
-    // 監聽窗口大小變化修正寬度
     window.addEventListener('resize', () => {
         slideWidth = track.offsetWidth;
     });
