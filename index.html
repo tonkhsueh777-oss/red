@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>非遺更有範 | 新中式文創</title>
+    <title>非遺更有範 | 沉浸式東方美學</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -18,18 +16,15 @@
             theme: {
                 extend: {
                     colors: {
-                        'ink': '#2C2C2C',       // 墨黑
-                        'paper': '#F7F4EF',     // 米宣白
-                        'rouge': '#C93836',     // 故宮紅
-                        'gold': '#D4AF37',      // 流金
-                        'stone': '#666666'      // 石灰
+                        'ink': '#2C2C2C',
+                        'paper': '#F7F4EF',
+                        'rouge': '#C93836',
+                        'gold': '#D4AF37',
+                        'stone': '#666666'
                     },
                     fontFamily: {
                         serif: ['"Noto Serif SC"', 'serif'],
                         sans: ['"Noto Sans SC"', 'sans-serif'],
-                    },
-                    backgroundImage: {
-                        'texture': "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
                     }
                 }
             }
@@ -37,233 +32,182 @@
     </script>
 
     <style>
-        /* 全局樣式優化 */
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #F7F4EF;
-            color: #2C2C2C;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #F7F4EF; color: #2C2C2C; overflow-x: hidden; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .bg-texture { background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); opacity: 0.6; }
+        .vertical-text { writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 0.3em; }
         
-        /* 隱藏滾動條但保持功能 */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* 模擬紙張紋理 */
-        .bg-texture {
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            opacity: 0.6;
-        }
-
-        /* 豎排文字 */
-        .vertical-text {
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            letter-spacing: 0.3em;
-        }
+        /* 儀式感關鍵：初始隱藏狀態 */
+        .reveal-clip { clip-path: inset(0 0 100% 0); } /* 像捲軸一樣捲起 */
+        .reveal-blur { filter: blur(10px); opacity: 0; transform: translateY(20px); }
     </style>
 </head>
-<body class="bg-paper relative">
+<body class="bg-paper relative selection:bg-rouge selection:text-white">
 
     <div class="fixed inset-0 bg-texture pointer-events-none z-0"></div>
 
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 flex justify-between items-center bg-transparent backdrop-blur-sm">
-        <i class="fa-solid fa-bars text-xl text-ink cursor-pointer"></i>
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 px-6 py-4 flex justify-between items-center bg-transparent">
+        <i class="fa-solid fa-bars text-xl text-ink"></i>
         <div class="font-serif font-bold text-lg tracking-widest text-ink">非遺</div>
-        <div class="relative cursor-pointer">
-            <i class="fa-solid fa-bag-shopping text-xl text-ink"></i>
-            <span class="absolute -top-1 -right-1 bg-rouge text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
-        </div>
+        <div class="relative"><i class="fa-solid fa-bag-shopping text-xl text-ink"></i></div>
     </nav>
 
     <header class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden z-10">
         <div class="absolute inset-0 z-[-1]">
-            <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 scale-110" id="hero-bg" alt="Background">
-            <div class="absolute inset-0 bg-gradient-to-b from-paper/30 via-transparent to-paper"></div>
+            <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-80 scale-110" id="hero-bg" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-paper/20 via-transparent to-paper"></div>
         </div>
 
-        <div class="text-center z-10 space-y-6 mt-10">
-            <h2 class="text-stone text-sm tracking-[0.5em] font-light uppercase opacity-0" id="hero-sub">Chinese Intangible Heritage</h2>
-            <h1 class="font-serif text-6xl text-ink font-bold opacity-0 leading-tight" id="hero-title">
-                非遺<br><span class="text-rouge">更</span>有範
+        <div class="text-center z-10 space-y-8 mt-10">
+            <h2 class="hero-text text-stone text-xs tracking-[0.6em] font-light uppercase">Intangible Cultural Heritage</h2>
+            <h1 class="hero-text font-serif text-6xl text-ink font-bold leading-tight">
+                非遺<br><span class="text-rouge inline-block transform origin-bottom hover:scale-110 transition-transform duration-500">更</span>有範
             </h1>
-            <p class="text-stone font-serif text-sm tracking-widest mt-4 opacity-0" id="hero-desc">
+            <div class="hero-text w-px h-16 bg-gradient-to-b from-ink/0 via-ink/50 to-ink/0 mx-auto my-4"></div>
+            <p class="hero-text text-stone font-serif text-sm tracking-widest">
                 東方美學 · 匠心傳承
             </p>
         </div>
-
-        <div class="absolute bottom-24 animate-bounce">
-            <i class="fa-solid fa-chevron-down text-stone opacity-50"></i>
+        
+        <div class="absolute bottom-10 animate-pulse text-stone text-xs tracking-widest opacity-50">
+            滑動賞析
         </div>
     </header>
 
-    <section class="relative py-20 px-6 z-10 max-w-lg mx-auto">
-        <div class="flex justify-between items-start">
-            <div class="w-2/3 pt-12">
-                <p class="text-stone leading-loose text-justify text-sm gs-reveal">
-                    致力於將中國傳統非遺文化與現代生活美學結合。透過創意設計，讓古老的技藝「活」在當下，走進年輕人的日常生活。
+    <section class="relative py-24 px-8 z-10 max-w-lg mx-auto min-h-[60vh] flex items-center">
+        <div class="flex justify-between items-start w-full">
+            <div class="w-2/3 pt-12 space-y-8">
+                <p class="ink-text text-stone leading-loose text-justify text-sm">
+                    致力於將中國傳統非遺文化與現代生活美學結合。
                 </p>
-                <div class="mt-8 w-12 h-12 border-2 border-rouge text-rouge flex items-center justify-center font-serif font-bold rounded-sm gs-reveal">
+                <p class="ink-text text-stone leading-loose text-justify text-sm">
+                    透過創意設計，讓古老的技藝「活」在當下，走進年輕人的日常生活。
+                </p>
+                <div class="seal-stamp w-12 h-12 border-2 border-rouge text-rouge flex items-center justify-center font-serif font-bold rounded-sm opacity-0 scale-50">
                     匠心
                 </div>
             </div>
             <div class="w-1/3 flex justify-end">
-                <h2 class="vertical-text font-serif text-3xl text-ink font-bold h-64 border-l border-stone/30 pl-4 gs-reveal">
+                <h2 class="vertical-title vertical-text font-serif text-3xl text-ink font-bold h-64 border-l border-stone/20 pl-6 transform translate-y-10 opacity-0">
                     傳承 · 創新 · 生活
                 </h2>
             </div>
         </div>
     </section>
 
-    <section class="py-16 z-10 max-w-lg mx-auto">
-        <div class="px-6 mb-8 flex items-end justify-between">
-            <h3 class="font-serif text-2xl text-ink">特色農產</h3>
-            <span class="text-xs text-stone tracking-widest">AGRICULTURE</span>
+    <section class="py-20 z-10 max-w-lg mx-auto px-4">
+        <div class="mb-12 flex items-end justify-between px-2">
+            <h3 class="font-serif text-2xl text-ink section-title">特色農產</h3>
+            <span class="text-[10px] text-stone tracking-[0.3em] uppercase opacity-50">Agriculture</span>
         </div>
 
-        <div class="mx-4 bg-white rounded-2xl shadow-lg overflow-hidden gs-card hover:shadow-xl transition-shadow duration-300">
-            <div class="relative h-64 overflow-hidden group">
-                <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="玉米">
-                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-stone">
+        <div class="bg-white p-3 rounded-t-[2rem] rounded-b-lg shadow-2xl shadow-stone/10 overflow-hidden product-card">
+            <div class="relative h-96 overflow-hidden rounded-t-[1.5rem]">
+                <div class="scroll-reveal absolute inset-0 z-10 bg-paper pointer-events-none"></div> <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=2070&auto=format&fit=crop" 
+                     class="product-img w-full h-full object-cover scale-125" alt="玉米">
+                <div class="absolute top-6 left-6 bg-white/80 backdrop-blur-md px-4 py-1.5 text-xs font-serif text-ink border border-ink/10">
                     農家自種
                 </div>
             </div>
-            <div class="p-6">
-                <div class="flex justify-between items-start mb-2">
-                    <h4 class="font-serif text-xl font-bold">忻州糯玉米</h4>
-                    <div class="text-right">
-                        <span class="block text-rouge font-bold text-lg">¥ 58.00</span>
-                        <span class="text-xs text-stone line-through">¥ 68.00</span>
-                    </div>
+            
+            <div class="p-8 text-center space-y-4">
+                <h4 class="product-info font-serif text-2xl font-bold opacity-0 translate-y-4">忻州糯玉米</h4>
+                <div class="product-info w-8 h-px bg-rouge mx-auto opacity-0 scale-x-0"></div>
+                <p class="product-info text-stone text-xs tracking-widest opacity-0 translate-y-4">黃金透亮 · 軟糯香甜</p>
+                <div class="product-info pt-4 flex items-center justify-center space-x-4 opacity-0 translate-y-4">
+                    <span class="text-xl font-bold text-ink">¥ 58.00</span>
+                    <button class="w-10 h-10 rounded-full border border-ink text-ink hover:bg-ink hover:text-white transition-colors flex items-center justify-center">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
-                <p class="text-stone text-xs mb-4">黃金透亮 · 軟糯香甜 · 6支禮盒裝</p>
-                <button class="w-full py-3 border border-ink text-ink text-sm hover:bg-ink hover:text-white transition-colors">
-                    加入購物車
-                </button>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-white z-10">
-        <div class="max-w-lg mx-auto">
-            <div class="px-6 mb-6 flex items-end justify-between">
-                <h3 class="font-serif text-2xl text-ink">文創周邊</h3>
-                <span class="text-xs text-stone tracking-widest">DESIGN</span>
+    <section class="py-24 bg-white z-10 overflow-hidden">
+        <div class="max-w-lg mx-auto relative">
+            <div class="px-6 mb-10 text-center">
+                <span class="block text-rouge text-xs mb-2 tracking-widest">DESIGN</span>
+                <h3 class="font-serif text-3xl text-ink">文創周邊</h3>
             </div>
 
-            <div class="flex overflow-x-auto hide-scrollbar px-6 space-x-4 pb-8 snap-x">
+            <div class="flex overflow-x-auto hide-scrollbar px-8 space-x-6 pb-10 snap-x">
                 
-                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
-                    <div class="h-64 bg-gray-100 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1888&auto=format&fit=crop" class="w-full h-full object-cover" alt="帆布袋">
+                <div class="gallery-item min-w-[280px] snap-center">
+                    <div class="h-[320px] relative overflow-hidden group rounded-sm">
+                         <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1888&auto=format&fit=crop" 
+                              class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110" alt="帆布袋">
+                         <div class="absolute bottom-0 left-0 bg-paper px-4 py-3 font-serif text-sm">
+                             ¥ 39.00
+                         </div>
                     </div>
-                    <div class="p-4 text-center">
-                        <h4 class="font-serif text-lg mb-1">國潮插畫帆布袋</h4>
-                        <p class="text-rouge font-bold">¥ 39.00</p>
-                    </div>
+                    <h4 class="mt-4 font-serif text-lg text-ink">國潮插畫帆布袋</h4>
                 </div>
 
-                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
-                    <div class="h-64 bg-gray-100 overflow-hidden">
-                        <img src="https://plus.unsplash.com/premium_photo-1661778007270-bda49f32371b?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="折扇">
+                <div class="gallery-item min-w-[280px] snap-center">
+                    <div class="h-[320px] relative overflow-hidden group rounded-sm">
+                         <img src="https://plus.unsplash.com/premium_photo-1661778007270-bda49f32371b?q=80&w=2070&auto=format&fit=crop" 
+                              class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110" alt="折扇">
+                         <div class="absolute bottom-0 left-0 bg-paper px-4 py-3 font-serif text-sm">
+                             ¥ 88.00
+                         </div>
                     </div>
-                    <div class="p-4 text-center">
-                        <h4 class="font-serif text-lg mb-1">古風雙面折扇</h4>
-                        <p class="text-rouge font-bold">¥ 88.00</p>
-                    </div>
+                    <h4 class="mt-4 font-serif text-lg text-ink">古風雙面折扇</h4>
                 </div>
-
-                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
-                    <div class="h-64 bg-gray-100 flex items-center justify-center text-stone/30">
-                        <span>更多設計開發中...</span>
-                    </div>
-                </div>
-
-            </div>
+                
+                <div class="min-w-[50px]"></div> </div>
         </div>
     </section>
 
-    <section class="py-16 z-10 max-w-lg mx-auto px-4">
-        <div class="mb-8 text-center">
-            <h3 class="font-serif text-2xl text-ink mb-2">東方禮贈</h3>
-            <div class="w-8 h-1 bg-rouge mx-auto"></div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-6">
-            <div class="relative rounded-xl overflow-hidden h-96 shadow-lg gs-reveal">
-                <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?q=80&w=1827&auto=format&fit=crop" class="w-full h-full object-cover brightness-75" alt="抱枕">
-                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                    <h4 class="font-serif text-2xl mb-1">醒獅國潮抱枕</h4>
-                    <p class="text-white/80 text-sm mb-3">家居新寵 · 刺繡工藝</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xl font-bold">¥ 128.00</span>
-                        <button class="w-8 h-8 rounded-full bg-white text-ink flex items-center justify-center">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-rouge rounded-xl p-6 text-white text-center shadow-lg relative overflow-hidden gs-reveal">
-                <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cloud.png')] opacity-20"></div>
-                <h4 class="font-serif text-2xl font-bold mb-2 relative z-10">非遺大禮包</h4>
-                <p class="text-white/80 text-sm mb-6 relative z-10">一盒盡享東方美學</p>
-                <div class="bg-white/10 backdrop-blur rounded-lg p-4 mb-4 relative z-10">
-                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=2024&auto=format&fit=crop" class="w-full h-32 object-cover rounded mb-2" alt="禮盒">
-                </div>
-                <button class="bg-white text-rouge px-8 py-2 rounded-full font-bold text-sm hover:bg-gold hover:text-white transition-colors relative z-10">
-                    查看詳情 ¥ 368
+    <section class="py-20 z-10 max-w-lg mx-auto px-4 pb-32">
+        <div class="relative rounded-xl overflow-hidden shadow-2xl gift-section">
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?q=80&w=1827&auto=format&fit=crop" 
+                 class="gift-bg w-full h-[500px] object-cover scale-110" alt="禮盒背景">
+            
+            <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 text-white space-y-6">
+                <div class="w-px h-12 bg-white/50 gift-elem"></div>
+                <h4 class="font-serif text-3xl font-bold tracking-widest gift-elem">醒獅 · 獻瑞</h4>
+                <p class="text-white/80 text-sm gift-elem">非遺文化限定禮盒</p>
+                <button class="mt-4 border border-white/30 px-8 py-3 rounded-full hover:bg-white hover:text-ink transition-all duration-500 gift-btn opacity-0 translate-y-4">
+                    查看詳情
                 </button>
             </div>
         </div>
     </section>
 
-    <footer class="bg-ink text-stone py-12 text-center z-10 pb-24">
-        <div class="font-serif text-2xl text-white mb-4 tracking-widest">非遺</div>
-        <div class="flex justify-center space-x-6 mb-8">
-            <i class="fa-brands fa-weixin text-xl hover:text-white transition-colors"></i>
-            <i class="fa-brands fa-weibo text-xl hover:text-white transition-colors"></i>
-            <i class="fa-solid fa-envelope text-xl hover:text-white transition-colors"></i>
+    <div class="fixed bottom-6 left-6 right-6 z-50">
+        <div class="bg-ink/90 backdrop-blur text-paper p-1.5 rounded-full shadow-2xl flex justify-between items-center pr-1.5 pl-6">
+            <span class="font-serif text-sm tracking-widest">¥ 368.00 禮盒組</span>
+            <button class="bg-paper text-ink rounded-full px-6 py-3 text-xs font-bold hover:bg-rouge hover:text-white transition-colors">
+                立即購買
+            </button>
         </div>
-        <p class="text-xs opacity-50">© 2026 HGG Animation Studio. All Rights Reserved.</p>
-    </footer>
-
-    <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] py-3 px-6 flex justify-between items-center z-50 border-t border-gray-100">
-        <div class="flex space-x-6 text-xs text-stone">
-            <div class="flex flex-col items-center cursor-pointer hover:text-ink">
-                <i class="fa-solid fa-house mb-1 text-base"></i>
-                <span>首頁</span>
-            </div>
-            <div class="flex flex-col items-center cursor-pointer hover:text-ink">
-                <i class="fa-solid fa-comment-dots mb-1 text-base"></i>
-                <span>客服</span>
-            </div>
-        </div>
-        <button class="bg-rouge text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-red-700 transition-colors transform active:scale-95">
-            立即選購
-        </button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        // 註冊 ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Hero 動畫 (進場文字淡入)
-        const tl = gsap.timeline();
-        tl.to("#hero-bg", { scale: 1, duration: 2, ease: "power2.out" })
-          .to("#hero-sub", { opacity: 1, y: 0, duration: 1 }, "-=1.5")
-          .to("#hero-title", { opacity: 1, y: 0, duration: 1 }, "-=0.8")
-          .to("#hero-desc", { opacity: 1, y: 0, duration: 1 }, "-=0.8");
+        // 1. HERO 開場：文字錯落浮現，背景緩慢縮放
+        const heroTl = gsap.timeline();
+        heroTl.from(".hero-text", {
+            y: 40,
+            opacity: 0,
+            filter: "blur(10px)", // 水墨暈染感
+            duration: 1.5,
+            stagger: 0.3, // 每個元素間隔 0.3秒
+            ease: "power3.out"
+        })
+        .to("#hero-bg", {
+            scale: 1,
+            duration: 3,
+            ease: "power2.out"
+        }, "-=2");
 
-        // 2. 滾動視差 (Parallax)
+        // HERO 視差滾動
         gsap.to("#hero-bg", {
             scrollTrigger: {
                 trigger: "header",
@@ -271,61 +215,126 @@
                 end: "bottom top",
                 scrub: true
             },
-            y: 100, // 背景移動速度慢於前景
-            opacity: 0.5
+            y: 150 // 背景移動速度慢，產生深度
         });
 
-        // 3. 通用淡入動畫 (Reveal)
-        gsap.utils.toArray('.gs-reveal').forEach(elem => {
-            gsap.from(elem, {
+        // 2. INTRO 理念：模擬書寫與蓋章
+        const introTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "section:nth-of-type(1)",
+                start: "top 70%",
+            }
+        });
+        
+        introTl.from(".vertical-title", {
+            height: 0, // 像捲軸拉開
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.inOut"
+        })
+        .from(".ink-text", {
+            y: 20,
+            opacity: 0,
+            filter: "blur(5px)",
+            duration: 1,
+            stagger: 0.4
+        }, "-=0.5")
+        .to(".seal-stamp", {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(1.7)" // 蓋章的彈跳感
+        }, "-=0.2");
+
+        // 3. PRODUCT 畫卷展開：這是最核心的儀式感
+        const productTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".product-card",
+                start: "top 75%",
+            }
+        });
+
+        // 圖片遮罩 (Curtain Reveal)
+        productTl.to(".scroll-reveal", {
+            height: 0, // 遮罩向上收起，露出圖片
+            duration: 1.4,
+            ease: "power4.inOut"
+        })
+        .to(".product-img", {
+            scale: 1, // 圖片同時從放大狀態回到正常
+            duration: 1.6,
+            ease: "power2.out"
+        }, "-=1.4")
+        .to(".product-info", {
+            opacity: 1,
+            y: 0,
+            scaleX: 1, // 線條展開
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        }, "-=0.8");
+
+        // 4. GALLERY 移步換景
+        gsap.utils.toArray(".gallery-item").forEach((item, i) => {
+            gsap.from(item, {
                 scrollTrigger: {
-                    trigger: elem,
-                    start: "top 85%", // 當元素頂部到達視窗 85% 處觸發
-                    toggleActions: "play none none reverse"
+                    trigger: ".gallery-item", // 第一個元素觸發
+                    start: "top 85%"
                 },
-                y: 50,
+                x: 100, // 從右側滑入
                 opacity: 0,
                 duration: 1,
+                delay: i * 0.2, // 依序出現
                 ease: "power3.out"
             });
         });
 
-        // 4. 卡片彈出動畫
-        gsap.from(".gs-card", {
+        // 5. GIFT 壓軸：沉浸式放大
+        gsap.to(".gift-bg", {
             scrollTrigger: {
-                trigger: ".gs-card",
-                start: "top 80%"
+                trigger: ".gift-section",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
             },
-            y: 100,
+            y: -50, // 背景視差
+            scale: 1 // 輕微縮放
+        });
+
+        gsap.from(".gift-elem", {
+            scrollTrigger: {
+                trigger: ".gift-section",
+                start: "top 70%"
+            },
+            y: 30,
             opacity: 0,
             duration: 1,
-            ease: "back.out(1.7)"
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+        
+        gsap.to(".gift-btn", {
+            scrollTrigger: {
+                trigger: ".gift-section",
+                start: "top 70%"
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.8
         });
 
-        // 5. 橫向滑動卡片 逐個出現
-        gsap.utils.toArray('.gs-slide-card').forEach((elem, i) => {
-            gsap.from(elem, {
-                scrollTrigger: {
-                    trigger: elem,
-                    start: "top 90%"
-                },
-                x: 50,
-                opacity: 0,
-                duration: 0.8,
-                delay: i * 0.2, // 錯落感
-                ease: "power2.out"
-            });
-        });
-
-        // Navbar 滾動變色
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('bg-white/90', 'shadow-sm');
-                nav.classList.remove('bg-transparent');
-            } else {
-                nav.classList.remove('bg-white/90', 'shadow-sm');
-                nav.classList.add('bg-transparent');
+        // Navbar 智能感知
+        ScrollTrigger.create({
+            start: "top -50",
+            onUpdate: self => {
+                const nav = document.getElementById("navbar");
+                if (self.direction === 1) { // 向下滾動
+                    nav.classList.add("-translate-y-full"); // 隱藏導航，沉浸體驗
+                } else { // 向上滾動
+                    nav.classList.remove("-translate-y-full"); // 顯示導航
+                    nav.classList.add("bg-paper/90", "shadow-sm"); // 加背景
+                }
             }
         });
     </script>
