@@ -7,11 +7,11 @@
     <style>
         /* --- 基礎設定 --- */
         :root {
-            --primary-red: #B83B32; /* 故宮紅 */
-            --bg-beige: #F7F5F0;   /* 米宣紙色 */
-            --text-dark: #2C2C2C;  /* 濃墨黑 */
+            --primary-red: #B83B32;
+            --bg-beige: #F7F5F0;
+            --text-dark: #2C2C2C;
             --text-grey: #666666;
-            --price-color: #D32F2F; /* 價格專用紅 */
+            --price-color: #D32F2F;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -105,7 +105,7 @@
         .grid-section {
             padding: 0 15px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 兩列大圖 */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -121,7 +121,7 @@
 
         .card-img-box {
             width: 100%;
-            aspect-ratio: 1/1; /* 正方形 */
+            aspect-ratio: 1/1;
             background: #eee;
         }
 
@@ -150,12 +150,11 @@
             margin-bottom: 8px;
         }
 
-        /* --- 新增：價格樣式 --- */
         .price-tag {
             color: var(--price-color);
             font-size: 1.1rem;
             font-weight: bold;
-            margin-top: auto; /* 將價格推到底部 */
+            margin-top: auto;
         }
         
         .price-currency {
@@ -163,35 +162,83 @@
             margin-right: 2px;
         }
 
-        /* --- 武漢方言區塊 --- */
+        /* --- 武漢方言區塊 (新版輪播) --- */
         .dialect-section {
             background: var(--text-dark);
             color: #fff;
-            padding: 30px 15px;
+            padding: 30px 0; /* 左右不留白，讓輪播滿版 */
             margin-top: 10px;
         }
 
+        /* 輪播容器 */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        /* 輪播軌道 */
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; /* 強制對齊 */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* 隱藏滾動條 */
+        }
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 輪播單項 */
+        .carousel-item {
+            flex: 0 0 100%; /* 每個佔滿 100% 寬度 */
+            scroll-snap-align: center;
+            position: relative;
+            text-align: center;
+        }
+
+        .carousel-img {
+            width: 100%;
+            max-width: 400px; /* 限制最大寬度以免太糊 */
+            height: auto;
+            border-radius: 4px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .carousel-caption {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f0f0f0;
+        }
+
+        /* 方言按鈕區 */
         .dialect-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 20px;
+            padding: 0 15px; /* 按鈕區要有邊距 */
         }
 
-        .tag {
+        .tag-btn {
             background: rgba(255,255,255,0.1);
-            padding: 8px 4px;
+            padding: 10px 4px;
             text-align: center;
             border: 1px solid #555;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: #fff;
         }
         
-        .big-img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 4px;
+        .tag-btn:active, .tag-btn.active {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
         }
 
         /* --- Sticky Footer --- */
@@ -362,20 +409,52 @@
     </div>
 
     <div class="dialect-section">
-        <h2 style="text-align: center; border-bottom: 1px solid #555; padding-bottom: 10px; margin-bottom: 20px;">武漢方言 Ｘ 國潮 T恤</h2>
-        <img src="https://placehold.co/1080x800/333/FFF?text=Wuhan+Dialect" class="big-img">
-        <div style="text-align:center; margin-bottom:10px; color:#ffdddd; font-weight:bold; font-size:1.2rem;">均一價 ¥99</div>
+        <h2 style="text-align: center; border-bottom: 1px solid #555; padding-bottom: 10px; margin: 0 15px 20px;">武漢方言 Ｘ 國潮 T恤</h2>
         
+        <div class="carousel-container">
+            <div class="carousel-track" id="dialectCarousel">
+                <div class="carousel-item" id="slide-0">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Suan+Niao+(Bird)" class="carousel-img">
+                    <div class="carousel-caption">蒜鳥 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-1">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Xu+Hu+(Fox)" class="carousel-img">
+                    <div class="carousel-caption">虛狐 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-2">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Guo+Jing+(Whale)" class="carousel-img">
+                    <div class="carousel-caption">裹鯨 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-3">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Gao+Mo+Shi+(Lion)" class="carousel-img">
+                    <div class="carousel-caption">搞磨獅 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-4">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Cuo+Xia+Zi+(Crayfish)" class="carousel-img">
+                    <div class="carousel-caption">撮蝦子 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-5">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Jian+Ban+Yan" class="carousel-img">
+                    <div class="carousel-caption">尖板眼 T恤</div>
+                </div>
+                <div class="carousel-item" id="slide-6">
+                    <img src="https://placehold.co/800x800/333/FFF?text=Xin+Le+Ni+De+Xie" class="carousel-img">
+                    <div class="carousel-caption">信了你的邪 T恤</div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:15px; color:#ffdddd; font-weight:bold; font-size:1.2rem;">均一價 ¥99</div>
+        </div>
+
         <div class="dialect-grid">
-            <div class="tag">蒜鳥</div>
-            <div class="tag">虛狐</div>
-            <div class="tag">裹鯨</div>
-            <div class="tag">搞磨獅</div>
-            <div class="tag">撮蝦子</div>
-            <div class="tag">尖板眼</div>
-            <div class="tag">信了你的邪</div>
-            <div class="tag" style="background:var(--primary-red); border:none;">熱銷中</div>
-            <div class="tag" style="background:var(--primary-red); border:none;">訂製</div>
+            <div class="tag-btn" onclick="scrollToSlide(0)">蒜鳥</div>
+            <div class="tag-btn" onclick="scrollToSlide(1)">虛狐</div>
+            <div class="tag-btn" onclick="scrollToSlide(2)">裹鯨</div>
+            <div class="tag-btn" onclick="scrollToSlide(3)">搞磨獅</div>
+            <div class="tag-btn" onclick="scrollToSlide(4)">撮蝦子</div>
+            <div class="tag-btn" onclick="scrollToSlide(5)">尖板眼</div>
+            <div class="tag-btn" onclick="scrollToSlide(6)">信了你的邪</div>
+            <div class="tag-btn" style="background:var(--primary-red); border:none; cursor:default;">熱銷中</div>
+            <div class="tag-btn" style="background:var(--primary-red); border:none; cursor:default;">訂製</div>
         </div>
     </div>
 
@@ -394,6 +473,59 @@
     </div>
 
 </div>
+
+<script>
+    const track = document.getElementById('dialectCarousel');
+    let scrollAmount = 0;
+    let slideWidth = track.offsetWidth; // 獲取單個幻燈片寬度
+    let currentSlide = 0;
+    const totalSlides = 7;
+    let autoPlayInterval;
+    let isPaused = false;
+
+    // 手動點擊跳轉
+    function scrollToSlide(index) {
+        currentSlide = index;
+        const slide = document.getElementById(`slide-${index}`);
+        track.scrollTo({
+            left: slide.offsetLeft,
+            behavior: 'smooth'
+        });
+        resetTimer(); // 點擊後重置計時器
+    }
+
+    // 自動播放邏輯
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            if(!isPaused) {
+                currentSlide++;
+                if (currentSlide >= totalSlides) {
+                    currentSlide = 0; // 回到第一張
+                }
+                scrollToSlide(currentSlide);
+            }
+        }, 3000); // 每 3 秒換一張
+    }
+
+    function resetTimer() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+
+    // 當用戶觸摸時暫停自動播放，避免打架
+    track.addEventListener('touchstart', () => { isPaused = true; });
+    track.addEventListener('touchend', () => { 
+        setTimeout(() => { isPaused = false; resetTimer(); }, 2000); 
+    });
+
+    // 啟動自動播放
+    startAutoPlay();
+    
+    // 監聽窗口大小變化修正寬度
+    window.addEventListener('resize', () => {
+        slideWidth = track.offsetWidth;
+    });
+</script>
 
 </body>
 </html>
