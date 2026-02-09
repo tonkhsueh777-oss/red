@@ -1,716 +1,333 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>紅義米｜新年限定・年貨專場</title>
-  <meta name="description" content="紅義米新年限定年貨專場。精選好物、限量禮盒、到店/宅配皆可。">
-  <style>
-    :root{
-      --bg:#070A0F;
-      --card:#0C1220;
-      --card2:#0A1020;
-      --line:rgba(255,255,255,.08);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.62);
-      --soft:rgba(255,255,255,.12);
-      --gold:#D8C08B;
-      --gold2:#B99A5A;
-      --red:#B11B2B; /* 用很克制的紅 */
-      --ok:#35d07f;
-      --warn:#ffcc66;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 18px;
-      --radius2: 26px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      background:
-        radial-gradient(1200px 900px at 20% -10%, rgba(216,192,139,.16), transparent 55%),
-        radial-gradient(900px 900px at 90% 0%, rgba(177,27,43,.10), transparent 60%),
-        radial-gradient(900px 700px at 40% 110%, rgba(66,111,255,.12), transparent 55%),
-        linear-gradient(180deg, #05070C 0%, #060A13 40%, #05070C 100%);
-      color:var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    a{color:inherit;text-decoration:none}
-    .safe{padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 96px}
-    .topbar{
-      position:sticky; top:0; z-index:30;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(7,10,15,.88), rgba(7,10,15,.55));
-      border-bottom:1px solid var(--line);
-    }
-    .topbar .inner{max-width:980px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
-    .brand{
-      display:flex;align-items:center;gap:10px;min-width:0;flex:1;
-    }
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:
-        radial-gradient(12px 12px at 25% 30%, rgba(255,255,255,.20), transparent 60%),
-        radial-gradient(24px 24px at 60% 70%, rgba(216,192,139,.28), transparent 60%),
-        linear-gradient(145deg, rgba(216,192,139,.22), rgba(177,27,43,.10));
-      border:1px solid rgba(216,192,139,.25);
-      box-shadow: 0 8px 20px rgba(0,0,0,.35);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo:after{
-      content:""; position:absolute; inset:-40%;
-      background: conic-gradient(from 210deg, transparent 0 40%, rgba(216,192,139,.35) 50%, transparent 60% 100%);
-      animation: spin 8s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .brand .title{min-width:0}
-    .brand h1{margin:0;font-size:14px;letter-spacing:.4px}
-    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:12px;
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      color:var(--text);
-      font-weight:600;font-size:13px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.25);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-    }
-    .btn:active{transform: translateY(1px) scale(.99)}
-    .btn.primary{
-      border-color: rgba(216,192,139,.35);
-      background:
-        radial-gradient(180px 80px at 20% 0%, rgba(216,192,139,.22), transparent 60%),
-        linear-gradient(145deg, rgba(216,192,139,.18), rgba(177,27,43,.10));
-    }
-    .btn.ghost{background:transparent;box-shadow:none}
-    .icon{
-      width:18px;height:18px;display:inline-block;opacity:.9
-    }
-    .hero{
-      margin-top:14px;
-      border-radius: var(--radius2);
-      border:1px solid rgba(216,192,139,.18);
-      background:
-        radial-gradient(900px 300px at 10% 0%, rgba(216,192,139,.18), transparent 60%),
-        radial-gradient(500px 260px at 90% 10%, rgba(177,27,43,.12), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:""; position:absolute; inset:-2px;
-      background:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.25), transparent 60%),
-        radial-gradient(2px 2px at 70% 60%, rgba(255,255,255,.18), transparent 60%),
-        radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.18), transparent 60%);
-      opacity:.55; pointer-events:none;
-      animation: twinkle 6s ease-in-out infinite alternate;
-    }
-    @keyframes twinkle{from{transform:translateY(0)}to{transform:translateY(-6px)}}
-    .hero .content{padding:18px 16px 16px;position:relative;z-index:1}
-    .kicker{
-      display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;
-      letter-spacing:.8px;text-transform:uppercase
-    }
-    .dot{width:8px;height:8px;border-radius:99px;background:var(--gold);box-shadow:0 0 0 6px rgba(216,192,139,.12)}
-    .hero h2{margin:10px 0 6px;font-size:22px;letter-spacing:.4px}
-    .hero h2 span{color:var(--gold)}
-    .hero .sub{margin:0;color:var(--muted);line-height:1.5;font-size:13px}
-    .hero .row{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-    .hero .tag{
-      padding:8px 10px;border-radius:999px;
-      background: rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:rgba(255,255,255,.78);
-      font-size:12px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>非遺更有範 | 新中式文創</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .controls{margin:14px 2px 10px;display:flex;flex-direction:column;gap:10px}
-    .search{
-      display:flex;gap:10px;align-items:center;
-      padding:12px 12px;border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .search input{
-      flex:1;min-width:0;
-      background:transparent;border:0;outline:0;color:var(--text);
-      font-size:14px;
-    }
-    .search input::placeholder{color:rgba(255,255,255,.42)}
-    .chips{
-      display:flex;gap:8px;overflow:auto; padding-bottom:2px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .chip{
-      flex:0 0 auto;
-      padding:10px 12px;border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:rgba(255,255,255,.78);
-      font-size:13px;
-      transition: background .15s ease,border-color .15s ease;
-      user-select:none;
-    }
-    .chip.active{
-      border-color: rgba(216,192,139,.35);
-      background: rgba(216,192,139,.12);
-      color: rgba(255,255,255,.92);
-    }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ink': '#2C2C2C',       // 墨黑
+                        'paper': '#F7F4EF',     // 米宣白
+                        'rouge': '#C93836',     // 故宮紅
+                        'gold': '#D4AF37',      // 流金
+                        'stone': '#666666'      // 石灰
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'serif'],
+                        sans: ['"Noto Sans SC"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'texture': "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
+                    }
+                }
+            }
+        }
+    </script>
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (min-width:720px){
-      .grid{grid-template-columns: repeat(4, minmax(0, 1fr)); gap:12px;}
-      .wrap{padding:18px 14px 110px}
-      .hero h2{font-size:26px}
-    }
+    <style>
+        /* 全局樣式優化 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #F7F4EF;
+            color: #2C2C2C;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* 隱藏滾動條但保持功能 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
-    .card{
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
-      overflow:hidden;
-      position:relative;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
-    }
-    .card:active{transform: translateY(1px) scale(.995)}
-    .card:hover{border-color: rgba(216,192,139,.22)}
-    .thumb{
-      height:92px;
-      background:
-        radial-gradient(120px 80px at 20% 0%, rgba(216,192,139,.20), transparent 60%),
-        radial-gradient(120px 90px at 90% 40%, rgba(177,27,43,.12), transparent 60%),
-        linear-gradient(145deg, rgba(12,18,32,1), rgba(10,16,32,1));
-      border-bottom:1px solid var(--line);
-      position:relative;
-    }
-    .badge{
-      position:absolute; left:10px; top:10px;
-      padding:6px 8px;border-radius:999px;
-      font-size:11px;
-      border:1px solid rgba(216,192,139,.28);
-      background: rgba(216,192,139,.10);
-      color: rgba(255,255,255,.88);
-      backdrop-filter: blur(10px);
-    }
-    .badge.hot{border-color: rgba(177,27,43,.32); background: rgba(177,27,43,.16)}
-    .badge.new{border-color: rgba(66,111,255,.35); background: rgba(66,111,255,.12)}
-    .thumb .spark{
-      position:absolute; right:10px; bottom:10px;
-      width:34px;height:34px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      display:grid;place-items:center;
-      box-shadow: 0 12px 26px rgba(0,0,0,.25);
-    }
-    .card .body{padding:10px 10px 12px}
-    .name{font-size:13px;font-weight:700;line-height:1.25;margin:0 0 6px}
-    .desc{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.35;min-height:32px}
-    .meta{display:flex;align-items:end;justify-content:space-between;gap:8px}
-    .price{display:flex;flex-direction:column;gap:2px}
-    .price b{font-size:14px;color:rgba(255,255,255,.95)}
-    .price s{font-size:11px;color:rgba(255,255,255,.35)}
-    .mini{
-      padding:9px 10px;border-radius:14px;
-      border:1px solid rgba(216,192,139,.22);
-      background: rgba(216,192,139,.10);
-      font-weight:800;font-size:12px;
-      white-space:nowrap;
-    }
+        /* 模擬紙張紋理 */
+        .bg-texture {
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            opacity: 0.6;
+        }
 
-    .bottombar{
-      position:fixed; left:0; right:0; bottom:0; z-index:40;
-      padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-      background: linear-gradient(180deg, rgba(7,10,15,0), rgba(7,10,15,.85) 35%, rgba(7,10,15,.92));
-      border-top:1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
-    .bottombar .inner{
-      max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;
-    }
-    .sum{
-      flex:1;min-width:0;
-      padding:10px 12px;border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .sum .t{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
-    .sum .n{margin-top:2px;font-size:14px;font-weight:800;letter-spacing:.2px;display:flex;justify-content:space-between;gap:10px}
-    .cta{
-      min-width:120px;
-      padding:12px 14px;border-radius:16px;
-      border:1px solid rgba(216,192,139,.35);
-      background:
-        radial-gradient(240px 100px at 20% 0%, rgba(216,192,139,.24), transparent 60%),
-        linear-gradient(145deg, rgba(216,192,139,.16), rgba(177,27,43,.10));
-      font-weight:900;font-size:13px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
-    }
-
-    /* Cart Drawer */
-    .drawerOverlay{
-      position:fixed; inset:0; z-index:60;
-      background: rgba(0,0,0,.55);
-      opacity:0; pointer-events:none;
-      transition: opacity .18s ease;
-    }
-    .drawer{
-      position:fixed; left:0; right:0; bottom:-100%;
-      z-index:70;
-      background: linear-gradient(180deg, rgba(12,18,32,.98), rgba(7,10,15,.98));
-      border-top:1px solid rgba(216,192,139,.18);
-      border-top-left-radius: 22px;
-      border-top-right-radius: 22px;
-      box-shadow: 0 -24px 60px rgba(0,0,0,.65);
-      transition: bottom .22s ease;
-      max-height: 78vh;
-      display:flex; flex-direction:column;
-    }
-    .drawer.open{bottom:0}
-    .drawerOverlay.open{opacity:1; pointer-events:auto}
-    .drawerHeader{
-      padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;
-      border-bottom:1px solid var(--line);
-    }
-    .grab{
-      width:42px;height:4px;border-radius:99px;background:rgba(255,255,255,.18);
-      margin:6px auto 0;
-    }
-    .drawerHeader h3{margin:0;font-size:14px;letter-spacing:.3px}
-    .drawerBody{padding:12px 14px; overflow:auto}
-    .cartItem{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .cartThumb{
-      width:44px;height:44px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(30px 20px at 25% 15%, rgba(216,192,139,.20), transparent 60%),
-        radial-gradient(30px 24px at 80% 60%, rgba(177,27,43,.14), transparent 60%),
-        linear-gradient(145deg, rgba(12,18,32,1), rgba(10,16,32,1));
-      flex:0 0 auto;
-    }
-    .cartMain{flex:1; min-width:0}
-    .cartMain .n{font-size:13px;font-weight:800;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .cartMain .m{font-size:12px;color:var(--muted);margin:0 0 8px}
-    .qtyRow{display:flex;align-items:center;gap:8px}
-    .qtyBtn{
-      width:34px;height:34px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      font-weight:900;
-      display:grid;place-items:center;
-      user-select:none;
-    }
-    .qtyNum{min-width:26px;text-align:center;font-weight:900}
-    .cartPrice{font-weight:900;font-size:13px;white-space:nowrap}
-    .drawerFooter{
-      padding:12px 14px calc(12px + env(safe-area-inset-bottom));
-      border-top:1px solid rgba(255,255,255,.07);
-      display:flex; gap:10px; align-items:center;
-    }
-    .payInfo{flex:1; min-width:0}
-    .payInfo .t{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
-    .payInfo .n{margin-top:2px;font-size:16px;font-weight:1000;display:flex;justify-content:space-between}
-    .payBtn{
-      min-width:140px;
-      padding:12px 14px;border-radius:16px;
-      border:1px solid rgba(216,192,139,.35);
-      background:
-        radial-gradient(260px 120px at 20% 0%, rgba(216,192,139,.24), transparent 60%),
-        linear-gradient(145deg, rgba(216,192,139,.16), rgba(177,27,43,.10));
-      font-weight:1000;
-      box-shadow: 0 18px 50px rgba(0,0,0,.45);
-      text-align:center;
-    }
-    .empty{
-      padding:18px 2px;color:var(--muted);font-size:13px;line-height:1.6;
-    }
-
-    /* Toast */
-    .toast{
-      position:fixed; left:50%; transform:translateX(-50%);
-      bottom:92px; z-index:90;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(12,18,32,.92);
-      box-shadow: 0 18px 50px rgba(0,0,0,.55);
-      color:rgba(255,255,255,.90);
-      font-size:13px;
-      opacity:0; pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      backdrop-filter: blur(14px);
-      max-width:min(92vw, 520px);
-      text-align:center;
-    }
-    .toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
-    .foot{
-      margin-top:16px;
-      color:rgba(255,255,255,.46);
-      font-size:12px;
-      text-align:center;
-    }
-  </style>
+        /* 豎排文字 */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.3em;
+        }
+    </style>
 </head>
+<body class="bg-paper relative">
 
-<body class="safe">
-  <div class="topbar">
-    <div class="inner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="title">
-          <h1>紅義米｜新年限定</h1>
-          <p>年貨專場・精選 12+ 項・手機下單</p>
+    <div class="fixed inset-0 bg-texture pointer-events-none z-0"></div>
+
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 flex justify-between items-center bg-transparent backdrop-blur-sm">
+        <i class="fa-solid fa-bars text-xl text-ink cursor-pointer"></i>
+        <div class="font-serif font-bold text-lg tracking-widest text-ink">非遺</div>
+        <div class="relative cursor-pointer">
+            <i class="fa-solid fa-bag-shopping text-xl text-ink"></i>
+            <span class="absolute -top-1 -right-1 bg-rouge text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
         </div>
-      </div>
+    </nav>
 
-      <button class="btn ghost" id="openCartBtn" aria-label="開啟購物車">
-        <svg class="icon" viewBox="0 0 24 24" fill="none">
-          <path d="M6 7h15l-2 9H8L6 7Z" stroke="currentColor" stroke-width="1.6" />
-          <path d="M6 7 5 4H2" stroke="currentColor" stroke-width="1.6" />
-          <path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
-          <path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" fill="currentColor"/>
-        </svg>
-        <span id="cartCountTop">0</span>
-      </button>
-
-      <a class="btn primary" href="#products">
-        <svg class="icon" viewBox="0 0 24 24" fill="none">
-          <path d="M12 3v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="m7 10 5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M5 20h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        立即選購
-      </a>
-    </div>
-  </div>
-
-  <div class="wrap">
-    <section class="hero">
-      <div class="content">
-        <div class="kicker"><span class="dot"></span> LIMITED NEW YEAR DROP</div>
-        <h2>把「年味」做成 <span>更高級</span> 的一頁</h2>
-        <p class="sub">不走大紅大金俗套。以暗夜質感 + 低飽和金紅點綴，適合手機快速瀏覽、下單與轉發。</p>
-        <div class="row">
-          <span class="tag">限量禮盒</span>
-          <span class="tag">到店 / 宅配</span>
-          <span class="tag">企業採購</span>
-          <span class="tag">會員折扣</span>
+    <header class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden z-10">
+        <div class="absolute inset-0 z-[-1]">
+            <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover opacity-80 scale-110" id="hero-bg" alt="Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-paper/30 via-transparent to-paper"></div>
         </div>
-      </div>
-    </section>
 
-    <section class="controls" id="products">
-      <div class="search">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <input id="q" type="search" placeholder="搜尋：禮盒／米／醬／零食／茶…" autocomplete="off" />
-        <button class="btn ghost" id="clearQ" type="button">清除</button>
-      </div>
-
-      <div class="chips" id="chips"></div>
-    </section>
-
-    <section class="grid" id="grid" aria-live="polite"></section>
-
-    <div class="foot">© <span id="year"></span> 紅義米 Hong Yi Mi. All rights reserved.</div>
-  </div>
-
-  <!-- Bottom Bar -->
-  <div class="bottombar">
-    <div class="inner">
-      <div class="sum">
-        <div class="t">
-          <span>購物車</span>
-          <span id="miniCount">0 件</span>
+        <div class="text-center z-10 space-y-6 mt-10">
+            <h2 class="text-stone text-sm tracking-[0.5em] font-light uppercase opacity-0" id="hero-sub">Chinese Intangible Heritage</h2>
+            <h1 class="font-serif text-6xl text-ink font-bold opacity-0 leading-tight" id="hero-title">
+                非遺<br><span class="text-rouge">更</span>有範
+            </h1>
+            <p class="text-stone font-serif text-sm tracking-widest mt-4 opacity-0" id="hero-desc">
+                東方美學 · 匠心傳承
+            </p>
         </div>
-        <div class="n">
-          <span>合計</span>
-          <span id="miniTotal">$0</span>
+
+        <div class="absolute bottom-24 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-stone opacity-50"></i>
         </div>
-      </div>
-      <button class="cta" id="checkoutBtn">前往結帳</button>
-    </div>
-  </div>
+    </header>
 
-  <!-- Drawer -->
-  <div class="drawerOverlay" id="overlay"></div>
-  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="購物車">
-    <div class="grab" aria-hidden="true"></div>
-    <div class="drawerHeader">
-      <h3>購物車</h3>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="btn ghost" id="clearCartBtn">清空</button>
-        <button class="btn" id="closeCartBtn">關閉</button>
-      </div>
-    </div>
-    <div class="drawerBody" id="cartList"></div>
-    <div class="drawerFooter">
-      <div class="payInfo">
-        <div class="t"><span>商品小計</span><span id="subTotal">$0</span></div>
-        <div class="n"><span>應付</span><span id="grandTotal">$0</span></div>
-      </div>
-      <a class="payBtn" href="javascript:void(0)" id="payBtn">立即下單</a>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
-
-  <script>
-    // ====== 可自行改：公司名、活動名、商品內容 ======
-    const CURRENCY = "$"; // 需要改成 NT$/RMB 都可
-    const categories = ["全部","禮盒","主食","醬料","零食","茶飲","周邊"];
-
-    const products = [
-      {id:"p01", name:"新年典藏禮盒", desc:"低糖、低油、送禮不俗。含 6 款精選。", price:999, compareAt:1299, cat:"禮盒", badge:"HOT"},
-      {id:"p02", name:"紅義米・上選香米 2kg", desc:"顆粒飽滿，香氣乾淨。日常必備。", price:299, compareAt:360, cat:"主食", badge:"NEW"},
-      {id:"p03", name:"富貴堅果禮袋", desc:"綜合堅果 + 果乾，口感層次乾淨。", price:499, compareAt:620, cat:"零食"},
-      {id:"p04", name:"松露椒麻醬", desc:"香麻不嗆，拌麵/拌飯一匙到位。", price:380, compareAt:450, cat:"醬料", badge:"HOT"},
-      {id:"p05", name:"XO 干貝醬", desc:"鮮味乾淨、餘韻長。炒飯神器。", price:520, compareAt:620, cat:"醬料"},
-      {id:"p06", name:"黑糖桂圓茶", desc:"暖甜不膩，冷泡/熱沖皆可。", price:320, compareAt:390, cat:"茶飲"},
-      {id:"p07", name:"手工牛肉乾 150g", desc:"薄切回甘，越嚼越香。", price:450, compareAt:520, cat:"零食"},
-      {id:"p08", name:"臘味香腸 500g", desc:"油脂比例克制，香氣更乾淨。", price:350, compareAt:420, cat:"主食"},
-      {id:"p09", name:"福氣米餅盒", desc:"輕脆不油。適合親友聚會分享。", price:260, compareAt:320, cat:"零食"},
-      {id:"p10", name:"年節小點綜合", desc:"酥、脆、甜比例做得更高級。", price:880, compareAt:999, cat:"禮盒"},
-      {id:"p11", name:"品牌紅金禮袋", desc:"霧面質感，送禮更完整。", price:60, compareAt:80, cat:"周邊"},
-      {id:"p12", name:"新年限定貼紙組", desc:"黑金質感、局部燙金風格。", price:39, compareAt:59, cat:"周邊", badge:"NEW"},
-      {id:"p13", name:"米香脆片 3 入", desc:"淡甜不膩，適合辦公室零嘴。", price:189, compareAt:220, cat:"零食"},
-      {id:"p14", name:"紅義米・糙米 2kg", desc:"口感更有咀嚼感，健康取向。", price:339, compareAt:399, cat:"主食"},
-    ];
-
-    // ====== State ======
-    let state = {
-      cat: "全部",
-      q: "",
-      cart: new Map() // id -> qty
-    };
-
-    // ====== Helpers ======
-    const $ = (sel, el=document)=>el.querySelector(sel);
-    const $$ = (sel, el=document)=>Array.from(el.querySelectorAll(sel));
-    const money = (n)=>`${CURRENCY}${n.toLocaleString("zh-Hant")}`;
-    const sumCartQty = ()=>Array.from(state.cart.values()).reduce((a,b)=>a+b,0);
-    const cartItems = ()=>Array.from(state.cart.entries()).map(([id,qty])=>{
-      const p = products.find(x=>x.id===id);
-      return {p, qty, line: (p?.price||0)*qty};
-    }).filter(x=>x.p);
-
-    function toast(msg){
-      const t = $("#toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      clearTimeout(toast._tm);
-      toast._tm = setTimeout(()=>t.classList.remove("show"), 1400);
-    }
-
-    function setCart(id, qty){
-      if(qty<=0) state.cart.delete(id);
-      else state.cart.set(id, qty);
-      renderCart();
-      renderBottom();
-    }
-
-    // ====== UI Render ======
-    function renderChips(){
-      const chips = $("#chips");
-      chips.innerHTML = categories.map(c => `
-        <button class="chip ${state.cat===c?'active':''}" data-cat="${c}">${c}</button>
-      `).join("");
-      $$(".chip", chips).forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          state.cat = btn.dataset.cat;
-          renderChips();
-          renderGrid();
-        });
-      });
-    }
-
-    function badgeHTML(b){
-      if(!b) return "";
-      const cls = b==="HOT" ? "hot" : (b==="NEW" ? "new" : "");
-      const label = b==="HOT" ? "熱銷" : (b==="NEW" ? "新品" : b);
-      return `<span class="badge ${cls}">${label}</span>`;
-    }
-
-    function renderGrid(){
-      const grid = $("#grid");
-      const q = state.q.trim().toLowerCase();
-      const list = products.filter(p=>{
-        const inCat = state.cat==="全部" ? true : p.cat===state.cat;
-        const inQ = !q ? true : (p.name+p.desc+p.cat).toLowerCase().includes(q);
-        return inCat && inQ;
-      });
-
-      grid.innerHTML = list.map(p=>{
-        const qtyInCart = state.cart.get(p.id) || 0;
-        return `
-          <article class="card" data-id="${p.id}">
-            <div class="thumb">
-              ${badgeHTML(p.badge)}
-              <div class="spark" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6Z" stroke="rgba(255,255,255,.88)" stroke-width="1.6" stroke-linejoin="round"/>
-                </svg>
-              </div>
-            </div>
-            <div class="body">
-              <p class="name">${p.name}</p>
-              <p class="desc">${p.desc}</p>
-              <div class="meta">
-                <div class="price">
-                  <b>${money(p.price)}</b>
-                  ${p.compareAt ? `<s>${money(p.compareAt)}</s>` : `<span style="height:13px"></span>`}
+    <section class="relative py-20 px-6 z-10 max-w-lg mx-auto">
+        <div class="flex justify-between items-start">
+            <div class="w-2/3 pt-12">
+                <p class="text-stone leading-loose text-justify text-sm gs-reveal">
+                    致力於將中國傳統非遺文化與現代生活美學結合。透過創意設計，讓古老的技藝「活」在當下，走進年輕人的日常生活。
+                </p>
+                <div class="mt-8 w-12 h-12 border-2 border-rouge text-rouge flex items-center justify-center font-serif font-bold rounded-sm gs-reveal">
+                    匠心
                 </div>
-                <button class="mini" data-add="${p.id}">
-                  ${qtyInCart ? `已加 ${qtyInCart}` : "加入"}
-                </button>
-              </div>
             </div>
-          </article>
-        `;
-      }).join("");
-
-      $$("[data-add]", grid).forEach(btn=>{
-        btn.addEventListener("click", (e)=>{
-          e.stopPropagation();
-          const id = btn.dataset.add;
-          const cur = state.cart.get(id) || 0;
-          setCart(id, cur + 1);
-          toast("已加入購物車");
-          renderGrid(); // 更新「已加 x」
-        });
-      });
-    }
-
-    function renderBottom(){
-      const items = cartItems();
-      const qty = sumCartQty();
-      const total = items.reduce((a,b)=>a+b.line,0);
-
-      $("#miniCount").textContent = `${qty} 件`;
-      $("#miniTotal").textContent = money(total);
-      $("#cartCountTop").textContent = qty;
-
-      $("#subTotal").textContent = money(total);
-      $("#grandTotal").textContent = money(total);
-    }
-
-    function renderCart(){
-      const list = $("#cartList");
-      const items = cartItems();
-      if(!items.length){
-        list.innerHTML = `<div class="empty">購物車目前是空的。<br/>挑幾樣年貨，整頁質感就完整了。</div>`;
-        renderBottom();
-        return;
-      }
-      list.innerHTML = items.map(({p,qty,line})=>`
-        <div class="cartItem" data-id="${p.id}">
-          <div class="cartThumb" aria-hidden="true"></div>
-          <div class="cartMain">
-            <p class="n">${p.name}</p>
-            <p class="m">${p.cat}｜${money(p.price)} / 件</p>
-            <div class="qtyRow">
-              <button class="qtyBtn" data-dec="${p.id}">−</button>
-              <div class="qtyNum">${qty}</div>
-              <button class="qtyBtn" data-inc="${p.id}">＋</button>
+            <div class="w-1/3 flex justify-end">
+                <h2 class="vertical-text font-serif text-3xl text-ink font-bold h-64 border-l border-stone/30 pl-4 gs-reveal">
+                    傳承 · 創新 · 生活
+                </h2>
             </div>
-          </div>
-          <div class="cartPrice">${money(line)}</div>
         </div>
-      `).join("");
+    </section>
 
-      $$("[data-dec]", list).forEach(b=>{
-        b.addEventListener("click", ()=>{
-          const id=b.dataset.dec; setCart(id, (state.cart.get(id)||0) - 1);
-          renderGrid();
+    <section class="py-16 z-10 max-w-lg mx-auto">
+        <div class="px-6 mb-8 flex items-end justify-between">
+            <h3 class="font-serif text-2xl text-ink">特色農產</h3>
+            <span class="text-xs text-stone tracking-widest">AGRICULTURE</span>
+        </div>
+
+        <div class="mx-4 bg-white rounded-2xl shadow-lg overflow-hidden gs-card hover:shadow-xl transition-shadow duration-300">
+            <div class="relative h-64 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1551754655-cd27e38d2076?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" alt="玉米">
+                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-stone">
+                    農家自種
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-serif text-xl font-bold">忻州糯玉米</h4>
+                    <div class="text-right">
+                        <span class="block text-rouge font-bold text-lg">¥ 58.00</span>
+                        <span class="text-xs text-stone line-through">¥ 68.00</span>
+                    </div>
+                </div>
+                <p class="text-stone text-xs mb-4">黃金透亮 · 軟糯香甜 · 6支禮盒裝</p>
+                <button class="w-full py-3 border border-ink text-ink text-sm hover:bg-ink hover:text-white transition-colors">
+                    加入購物車
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white z-10">
+        <div class="max-w-lg mx-auto">
+            <div class="px-6 mb-6 flex items-end justify-between">
+                <h3 class="font-serif text-2xl text-ink">文創周邊</h3>
+                <span class="text-xs text-stone tracking-widest">DESIGN</span>
+            </div>
+
+            <div class="flex overflow-x-auto hide-scrollbar px-6 space-x-4 pb-8 snap-x">
+                
+                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
+                    <div class="h-64 bg-gray-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1888&auto=format&fit=crop" class="w-full h-full object-cover" alt="帆布袋">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif text-lg mb-1">國潮插畫帆布袋</h4>
+                        <p class="text-rouge font-bold">¥ 39.00</p>
+                    </div>
+                </div>
+
+                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
+                    <div class="h-64 bg-gray-100 overflow-hidden">
+                        <img src="https://plus.unsplash.com/premium_photo-1661778007270-bda49f32371b?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="折扇">
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif text-lg mb-1">古風雙面折扇</h4>
+                        <p class="text-rouge font-bold">¥ 88.00</p>
+                    </div>
+                </div>
+
+                <div class="min-w-[260px] snap-center bg-paper rounded-xl overflow-hidden shadow-sm gs-slide-card">
+                    <div class="h-64 bg-gray-100 flex items-center justify-center text-stone/30">
+                        <span>更多設計開發中...</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 z-10 max-w-lg mx-auto px-4">
+        <div class="mb-8 text-center">
+            <h3 class="font-serif text-2xl text-ink mb-2">東方禮贈</h3>
+            <div class="w-8 h-1 bg-rouge mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6">
+            <div class="relative rounded-xl overflow-hidden h-96 shadow-lg gs-reveal">
+                <img src="https://images.unsplash.com/photo-1584100936595-c0654b55a2e6?q=80&w=1827&auto=format&fit=crop" class="w-full h-full object-cover brightness-75" alt="抱枕">
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                    <h4 class="font-serif text-2xl mb-1">醒獅國潮抱枕</h4>
+                    <p class="text-white/80 text-sm mb-3">家居新寵 · 刺繡工藝</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold">¥ 128.00</span>
+                        <button class="w-8 h-8 rounded-full bg-white text-ink flex items-center justify-center">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-rouge rounded-xl p-6 text-white text-center shadow-lg relative overflow-hidden gs-reveal">
+                <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cloud.png')] opacity-20"></div>
+                <h4 class="font-serif text-2xl font-bold mb-2 relative z-10">非遺大禮包</h4>
+                <p class="text-white/80 text-sm mb-6 relative z-10">一盒盡享東方美學</p>
+                <div class="bg-white/10 backdrop-blur rounded-lg p-4 mb-4 relative z-10">
+                    <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=2024&auto=format&fit=crop" class="w-full h-32 object-cover rounded mb-2" alt="禮盒">
+                </div>
+                <button class="bg-white text-rouge px-8 py-2 rounded-full font-bold text-sm hover:bg-gold hover:text-white transition-colors relative z-10">
+                    查看詳情 ¥ 368
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-ink text-stone py-12 text-center z-10 pb-24">
+        <div class="font-serif text-2xl text-white mb-4 tracking-widest">非遺</div>
+        <div class="flex justify-center space-x-6 mb-8">
+            <i class="fa-brands fa-weixin text-xl hover:text-white transition-colors"></i>
+            <i class="fa-brands fa-weibo text-xl hover:text-white transition-colors"></i>
+            <i class="fa-solid fa-envelope text-xl hover:text-white transition-colors"></i>
+        </div>
+        <p class="text-xs opacity-50">© 2026 HGG Animation Studio. All Rights Reserved.</p>
+    </footer>
+
+    <div class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] py-3 px-6 flex justify-between items-center z-50 border-t border-gray-100">
+        <div class="flex space-x-6 text-xs text-stone">
+            <div class="flex flex-col items-center cursor-pointer hover:text-ink">
+                <i class="fa-solid fa-house mb-1 text-base"></i>
+                <span>首頁</span>
+            </div>
+            <div class="flex flex-col items-center cursor-pointer hover:text-ink">
+                <i class="fa-solid fa-comment-dots mb-1 text-base"></i>
+                <span>客服</span>
+            </div>
+        </div>
+        <button class="bg-rouge text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-red-700 transition-colors transform active:scale-95">
+            立即選購
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        // 註冊 ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero 動畫 (進場文字淡入)
+        const tl = gsap.timeline();
+        tl.to("#hero-bg", { scale: 1, duration: 2, ease: "power2.out" })
+          .to("#hero-sub", { opacity: 1, y: 0, duration: 1 }, "-=1.5")
+          .to("#hero-title", { opacity: 1, y: 0, duration: 1 }, "-=0.8")
+          .to("#hero-desc", { opacity: 1, y: 0, duration: 1 }, "-=0.8");
+
+        // 2. 滾動視差 (Parallax)
+        gsap.to("#hero-bg", {
+            scrollTrigger: {
+                trigger: "header",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            },
+            y: 100, // 背景移動速度慢於前景
+            opacity: 0.5
         });
-      });
-      $$("[data-inc]", list).forEach(b=>{
-        b.addEventListener("click", ()=>{
-          const id=b.dataset.inc; setCart(id, (state.cart.get(id)||0) + 1);
-          renderGrid();
+
+        // 3. 通用淡入動畫 (Reveal)
+        gsap.utils.toArray('.gs-reveal').forEach(elem => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 85%", // 當元素頂部到達視窗 85% 處觸發
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
         });
-      });
 
-      renderBottom();
-    }
+        // 4. 卡片彈出動畫
+        gsap.from(".gs-card", {
+            scrollTrigger: {
+                trigger: ".gs-card",
+                start: "top 80%"
+            },
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: "back.out(1.7)"
+        });
 
-    // ====== Drawer Control ======
-    const overlay = $("#overlay");
-    const drawer = $("#drawer");
-    function openDrawer(){
-      overlay.classList.add("open");
-      drawer.classList.add("open");
-      document.body.style.overflow="hidden";
-      renderCart();
-    }
-    function closeDrawer(){
-      overlay.classList.remove("open");
-      drawer.classList.remove("open");
-      document.body.style.overflow="";
-    }
+        // 5. 橫向滑動卡片 逐個出現
+        gsap.utils.toArray('.gs-slide-card').forEach((elem, i) => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%"
+                },
+                x: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.2, // 錯落感
+                ease: "power2.out"
+            });
+        });
 
-    // ====== Events ======
-    $("#openCartBtn").addEventListener("click", openDrawer);
-    $("#checkoutBtn").addEventListener("click", openDrawer);
-    $("#closeCartBtn").addEventListener("click", closeDrawer);
-    overlay.addEventListener("click", closeDrawer);
-
-    $("#clearCartBtn").addEventListener("click", ()=>{
-      state.cart.clear();
-      renderCart(); renderGrid();
-      toast("已清空購物車");
-    });
-
-    $("#q").addEventListener("input", (e)=>{
-      state.q = e.target.value || "";
-      renderGrid();
-    });
-    $("#clearQ").addEventListener("click", ()=>{
-      state.q = "";
-      $("#q").value = "";
-      renderGrid();
-    });
-
-    $("#payBtn").addEventListener("click", ()=>{
-      const qty = sumCartQty();
-      if(!qty){ toast("購物車是空的"); return; }
-      // 這裡改成你的實際下單流程：跳轉付款頁 / 表單 / 小程序 / LINE / WhatsApp 等
-      const total = cartItems().reduce((a,b)=>a+b.line,0);
-      toast(`已建立訂單（示範）｜${qty} 件｜${money(total)}`);
-    });
-
-    // ====== Init ======
-    $("#year").textContent = new Date().getFullYear();
-    renderChips();
-    renderGrid();
-    renderCart();
-    renderBottom();
-  </script>
+        // Navbar 滾動變色
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/90', 'shadow-sm');
+                nav.classList.remove('bg-transparent');
+            } else {
+                nav.classList.remove('bg-white/90', 'shadow-sm');
+                nav.classList.add('bg-transparent');
+            }
+        });
+    </script>
 </body>
 </html>
