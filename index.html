@@ -38,7 +38,7 @@
         .hero-section {
             position: relative;
             width: 100%;
-            height: 500px; /* 對應 IMG_01 高度 */
+            height: 500px; 
             background-color: var(--primary-red);
             overflow: hidden;
             display: flex;
@@ -48,12 +48,11 @@
             color: #fff;
         }
         
-        /* 圖片佔位符 (生成圖片後請替換 img src) */
         .hero-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.8; /* 讓文字更清楚 */
+            opacity: 0.85; 
         }
 
         .hero-text {
@@ -69,7 +68,7 @@
             letter-spacing: 4px;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            writing-mode: vertical-rl; /* 豎排文字更有文化感 */
+            writing-mode: vertical-rl; 
             text-orientation: upright;
             margin: 0 auto;
             height: 300px;
@@ -93,19 +92,28 @@
         }
         
         .section-title h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary-red);
             display: inline-block;
             border-bottom: 2px solid var(--primary-red);
             padding-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .section-title p {
+            font-size: 0.8rem; 
+            margin-top: 5px; 
+            color:#999;
         }
 
-        /* --- 2. 熱門推薦 (Grid) --- */
+        /* --- 通用網格排版 (Grid System) --- */
+        /* 這是這次修改的重點，統一使用這種排版 */
         .grid-section {
             padding: 0 15px;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 兩列排版 */
+            grid-template-columns: repeat(2, 1fr); /* 強制兩列 */
             gap: 15px;
+            margin-bottom: 20px;
         }
 
         .product-card {
@@ -114,6 +122,8 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:active {
@@ -122,8 +132,9 @@
 
         .card-img-box {
             width: 100%;
-            aspect-ratio: 1/1;
+            aspect-ratio: 1/1; /* 保持正方形圖片 */
             background: #eee;
+            position: relative;
         }
 
         .card-img {
@@ -133,64 +144,44 @@
         }
 
         .card-info {
-            padding: 10px;
+            padding: 12px 10px;
             text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             margin-bottom: 4px;
+            line-height: 1.3;
         }
 
         .card-sub {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-grey);
         }
 
-        /* --- 3. 系列主題 (Horizontal Scroll) --- */
-        .scroll-section {
-            padding: 20px 0;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            padding-left: 15px;
+        /* --- 列表式排版 (用於文化單品) --- */
+        .list-section {
+            padding: 0 15px;
         }
 
-        .scroll-card {
-            display: inline-block;
-            width: 200px;
-            margin-right: 15px;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            vertical-align: top;
-        }
-
-        .scroll-img-box {
-            width: 100%;
-            height: 250px;
-            background: #ddd;
-        }
-
-        .scroll-info {
-            padding: 10px;
-            white-space: normal; /* 讓文字換行 */
-        }
-
-        /* --- 4. 文化單品 (List View) --- */
         .list-item {
             display: flex;
             background: #fff;
-            margin: 15px;
+            margin-bottom: 15px;
             padding: 10px;
             border-radius: 8px;
             align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
 
         .list-img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             background: #eee;
             border-radius: 4px;
             object-fit: cover;
@@ -202,12 +193,12 @@
             flex-grow: 1;
         }
 
-        /* --- 5. 武漢方言 (Feature) --- */
+        /* --- 武漢方言區塊 --- */
         .dialect-section {
             background: var(--text-dark);
             color: #fff;
             padding: 30px 15px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .dialect-grid {
@@ -219,10 +210,11 @@
 
         .tag {
             background: rgba(255,255,255,0.1);
-            padding: 8px;
+            padding: 8px 4px;
             text-align: center;
             border: 1px solid #555;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
         }
         
         .big-img {
@@ -234,10 +226,12 @@
 
         /* --- Footer Sticky Bar --- */
         .sticky-footer {
-            position: absolute; /* 在 mobile-container 內絕對定位 */
+            position: fixed;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%); /* 居中對齊 */
             width: 100%;
+            max-width: 480px;
             background: #fff;
             border-top: 1px solid #ddd;
             padding: 10px 20px;
@@ -245,9 +239,6 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            position: fixed; /* 固定在螢幕底部 */
-            max-width: 480px; /* 配合容器寬度 */
-            bottom: 0;
             z-index: 100;
         }
 
@@ -255,19 +246,21 @@
             background: var(--primary-red);
             color: #fff;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 12px 20px;
+            border-radius: 30px;
             font-weight: bold;
             flex-grow: 1;
             text-align: center;
-            margin-left: 10px;
+            margin-left: 15px;
             box-shadow: 0 4px 10px rgba(184, 59, 50, 0.3);
+            font-size: 0.95rem;
         }
 
         .brand-icon {
             font-size: 0.8rem;
             color: var(--text-grey);
             text-align: center;
+            min-width: 60px;
         }
 
     </style>
@@ -286,13 +279,13 @@
 
     <div class="section-title">
         <h2>好物推薦</h2>
-        <p style="font-size: 0.8rem; margin-top: 5px; color:#999;">兩岸文化 精選禮品</p>
+        <p>兩岸文化 精選禮品</p>
     </div>
 
     <div class="grid-section">
         <div class="product-card">
             <div class="card-img-box">
-                <img src="https://placehold.co/800x800/EEE/999?text=Pomelo+Candle" class="card-img" alt="香薰蠟燭">
+                <img src="https://placehold.co/800x800/EEE/999?text=Pomelo" class="card-img">
             </div>
             <div class="card-info">
                 <h3 class="card-title">台灣文旦柚</h3>
@@ -301,7 +294,7 @@
         </div>
         <div class="product-card">
             <div class="card-img-box">
-                <img src="https://placehold.co/800x800/EEE/999?text=Red+Cliff+Game" class="card-img" alt="桌遊紙牌">
+                <img src="https://placehold.co/800x800/EEE/999?text=Red+Cliff" class="card-img">
             </div>
             <div class="card-info">
                 <h3 class="card-title">火燒赤壁桌遊</h3>
@@ -310,7 +303,7 @@
         </div>
         <div class="product-card">
             <div class="card-img-box">
-                <img src="https://placehold.co/800x800/EEE/999?text=Fridge+Magnet" class="card-img" alt="冰箱貼">
+                <img src="https://placehold.co/800x800/EEE/999?text=Magnet" class="card-img">
             </div>
             <div class="card-info">
                 <h3 class="card-title">光復紀念日</h3>
@@ -319,7 +312,7 @@
         </div>
         <div class="product-card">
             <div class="card-img-box">
-                <img src="https://placehold.co/800x800/EEE/999?text=Badge" class="card-img" alt="吧唧">
+                <img src="https://placehold.co/800x800/EEE/999?text=Badge" class="card-img">
             </div>
             <div class="card-info">
                 <h3 class="card-title">武漢方言</h3>
@@ -330,49 +323,71 @@
 
     <div class="section-title">
         <h2>每一條路 都是回家的路</h2>
+        <p>溫暖手感 連結兩岸</p>
     </div>
     
-    <div class="scroll-section">
-        <div class="scroll-card">
-            <div class="scroll-img-box">
-                <img src="https://placehold.co/800x1000/EEE/999?text=Tote+Bag" class="card-img">
+    <div class="grid-section">
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Tote+Bag" class="card-img">
             </div>
-            <div class="scroll-info">
+            <div class="card-info">
                 <h3 class="card-title">回家路帆布袋</h3>
-                <p class="card-sub">溫暖手感 堅韌耐用</p>
+                <p class="card-sub">原創設計</p>
             </div>
         </div>
-        <div class="scroll-card">
-            <div class="scroll-img-box">
-                <img src="https://placehold.co/800x1000/EEE/999?text=Fan" class="card-img">
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Fan" class="card-img">
             </div>
-            <div class="scroll-info">
+            <div class="card-info">
                 <h3 class="card-title">回家路折扇</h3>
-                <p class="card-sub">清風徐來 思鄉情懷</p>
+                <p class="card-sub">清風徐來</p>
             </div>
         </div>
-        <div class="scroll-card">
-            <div class="scroll-img-box">
-                <img src="https://placehold.co/800x1000/EEE/999?text=Taipei+Road" class="card-img">
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Taipei+Road" class="card-img">
             </div>
-            <div class="scroll-info">
+            <div class="card-info">
                 <h3 class="card-title">台北路帆布袋</h3>
-                <p class="card-sub">解放大道 兩岸連結</p>
+                <p class="card-sub">解放大道</p>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="card-img-box">
+                <img src="https://placehold.co/800x800/EEE/999?text=Magnet+2" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">回家路冰箱貼</h3>
+                <p class="card-sub">紀念小物</p>
             </div>
         </div>
     </div>
 
-    <div style="padding: 0 15px;">
+    <div class="section-title">
+        <h2>文化典藏</h2>
+    </div>
+    
+    <div class="list-section">
         <div class="list-item">
-            <img src="https://placehold.co/800x600/EEE/999?text=History+Fan" class="list-img">
+            <img src="https://placehold.co/800x800/EEE/999?text=History" class="list-img">
             <div class="list-text">
-                <h3 class="card-title">嘉慶君遊台灣 / 琴台遇知音</h3>
+                <h3 class="card-title">嘉慶君遊台灣</h3>
                 <p class="card-sub">經典折扇系列</p>
             </div>
         </div>
         
         <div class="list-item">
-            <img src="https://placehold.co/800x600/EEE/999?text=Jin+Chan" class="list-img">
+            <img src="https://placehold.co/800x800/EEE/999?text=Qin+Tai" class="list-img">
+            <div class="list-text">
+                <h3 class="card-title">琴台遇知音</h3>
+                <p class="card-sub">經典折扇系列</p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <img src="https://placehold.co/800x800/EEE/999?text=Jin+Chan" class="list-img">
             <div class="list-text">
                 <h3 class="card-title">金蟾招財</h3>
                 <p class="card-sub">居家擺件 / 舒適抱枕</p>
@@ -380,7 +395,7 @@
         </div>
 
         <div class="list-item">
-            <img src="https://placehold.co/800x600/EEE/999?text=Silk+Scarf" class="list-img">
+            <img src="https://placehold.co/800x800/EEE/999?text=Scarf" class="list-img">
             <div class="list-text">
                 <h3 class="card-title">漢劇漢韻</h3>
                 <p class="card-sub">國風絲巾</p>
@@ -391,7 +406,7 @@
     <div class="dialect-section">
         <h2 style="text-align: center; border-bottom: 1px solid #555; padding-bottom: 10px; margin-bottom: 20px;">武漢方言 Ｘ 國潮 T恤</h2>
         
-        <img src="https://placehold.co/1080x800/333/FFF?text=Wuhan+Dialect+T-Shirts" class="big-img">
+        <img src="https://placehold.co/1080x800/333/FFF?text=Wuhan+Dialect" class="big-img">
 
         <div class="dialect-grid">
             <div class="tag">蒜鳥</div>
@@ -413,7 +428,7 @@
     <div class="sticky-footer">
         <div class="brand-icon">
             <div style="font-weight:bold; color:#333;">紅薏米</div>
-            <div>文創</div>
+            <div style="font-size:0.7rem;">文創</div>
         </div>
         <a href="tel:13517234133" class="cta-btn">
             銷售/定制：135-17234133
