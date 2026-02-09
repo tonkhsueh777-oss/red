@@ -91,4 +91,318 @@
         /* --- 卡片通用樣式 (含動畫) --- */
         .section-card {
             background: #fff;
-            border-radius: 16px
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #fdebd0;
+            
+            /* 初始狀態：隱藏並下移 */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* 動畫觸發狀態 */
+        .section-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px dashed #eee;
+            color: var(--dark-red);
+            font-weight: bold;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            background: #fffbf5;
+        }
+        
+        .card-header::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background-color: var(--gold);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        /* =========================================
+           2. 內容排版 (對應第二張圖的目錄結構)
+           ========================================= */
+        
+        /* 通用網格系統 */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 強制三欄 */
+            gap: 0;
+        }
+
+        .catalog-item {
+            padding: 20px 5px;
+            text-align: center;
+            border-right: 1px dashed #eee;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* 去除每行最後一個的右邊框 */
+        .catalog-item:nth-child(3n) { border-right: none; }
+        
+        /* 去除最後一行的底邊框 (視情況可選) */
+        .catalog-grid:last-child .catalog-item { border-bottom: 1px dashed #eee; }
+
+        .item-title {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* 產品類型標籤 (如：冰箱貼) */
+        .item-tag {
+            font-size: 0.75rem;
+            color: var(--primary-red);
+            background-color: #fff0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* 針對方言T恤的特殊樣式 */
+        .dialect-container {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .dialect-box {
+            background: #fcfcfc;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 12px 5px;
+            text-align: center;
+        }
+        .dialect-word {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--dark-red);
+            margin-bottom: 4px;
+        }
+        .dialect-type {
+            font-size: 0.7rem;
+            color: #999;
+        }
+
+        /* --- 底部懸浮按鈕 (第一版樣式) --- */
+        .cta-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 440px;
+            background: var(--dark-red);
+            color: var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(142, 0, 0, 0.4);
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .cta-bar:active { transform: translateX(-50%) scale(0.98); }
+
+        .cta-btn {
+            background: var(--gold);
+            color: var(--dark-red);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>兩岸文創 潮玩未來</h1>
+        <div class="subtitle">- 紅薏米 文創產品 -</div>
+        <div class="contact-badge">
+            銷售/定制：135-17234133
+        </div>
+    </header>
+    <div class="cloud-border"></div>
+
+    <main>
+        
+        <div class="section-card scroll-reveal">
+            <div class="card-header">文創紀念系列</div>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <span class="item-title">台灣光復<br>紀念日</span>
+                    <span class="item-tag">冰箱貼</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">台灣<br>文旦柚</span>
+                    <span class="item-tag">香薰蠟燭</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">火燒赤壁<br>桌遊</span>
+                    <span class="item-tag">紙牌</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card scroll-reveal">
+            <div class="card-header">每一條路都是回家的路</div>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <span class="item-title">回家的路<br>主題款</span>
+                    <span class="item-tag">帆布袋</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">回家的路<br>主題款</span>
+                    <span class="item-tag">冰箱貼</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">回家的路<br>主題款</span>
+                    <span class="item-tag">折扇</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card scroll-reveal">
+            <div class="card-header">兩岸地標與故事</div>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <span class="item-title">台北路的盡頭<br>是解放大道</span>
+                    <span class="item-tag">帆布袋</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">琴台<br>遇知音</span>
+                    <span class="item-tag">折扇</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">嘉慶君<br>遊台灣</span>
+                    <span class="item-tag">折扇</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card scroll-reveal">
+            <div class="card-header">吉祥寓意與漢韻</div>
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <span class="item-title">金蟾招財<br>系列</span>
+                    <span class="item-tag">擺件</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">金蟾招財<br>系列</span>
+                    <span class="item-tag">抱枕</span>
+                </div>
+                <div class="catalog-item">
+                    <span class="item-title">漢劇<br>漢韻</span>
+                    <span class="item-tag">絲巾</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card scroll-reveal">
+            <div class="card-header">武漢方言系列</div>
+            <div class="dialect-container">
+                <div class="dialect-box">
+                    <div class="dialect-word">吧唧</div>
+                    <div class="dialect-type">武漢方言</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">蒜鳥</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">虛狐</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">裹鯨</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">搞磨獅</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">撮蝦子</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">尖板眼</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+                <div class="dialect-box">
+                    <div class="dialect-word">信了你的邪</div>
+                    <div class="dialect-type">T恤</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card scroll-reveal">
+            <div class="card-header">產品實拍預覽</div>
+            <img src="https://images.unsplash.com/photo-1548676239-16a760b21394?q=80&w=800&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; display:block;" alt="帆布袋實拍">
+        </div>
+
+        <p style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 30px;">
+            © 紅薏米文創 All Rights Reserved.
+        </p>
+
+    </main>
+
+    <div class="cta-bar">
+        <div class="cta-text">
+            <span>諮詢熱線: </span>
+            <span style="font-size: 1.1rem; font-weight:bold;">135-17234133</span>
+        </div>
+        <div class="cta-btn">立即聯繫</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 設定觀察器選項
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // 當元素出現 10% 時觸發
+            };
+
+            // 建立觀察器
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible'); // 加入 visible class 啟動 CSS 動畫
+                        // observer.unobserve(entry.target); // 如果希望動畫只播一次，可以取消註解這行
+                    }
+                });
+            }, observerOptions);
+
+            // 選取所有帶有 scroll-reveal class 的元素
+            const elements = document.querySelectorAll('.scroll-reveal');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
