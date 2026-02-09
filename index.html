@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>紅薏米 | 兩岸文創</title>
     <style>
-        /* --- 核心風格：第一版的高級喜氣風 --- */
+        /* =========================================
+           1. 核心設計風格 (源自第一版)
+           ========================================= */
         :root {
-            --primary-red: #d32f2f;
-            --dark-red: #8e0000;
-            --gold: #ffb300;
-            --light-bg: #fffbf0;
-            --text-color: #3e2723;
-            --card-shadow: 0 4px 15px rgba(142, 0, 0, 0.1);
+            --primary-red: #d32f2f;   /* 主紅色 */
+            --dark-red: #8e0000;      /* 深紅色 */
+            --gold: #ffb300;          /* 亮金色 */
+            --light-bg: #fffbf0;      /* 米黃宣紙底色 */
+            --text-color: #3e2723;    /* 深褐文字 */
+            --card-shadow: 0 4px 15px rgba(142, 0, 0, 0.08); /* 高級感陰影 */
         }
 
         * {
@@ -25,289 +27,68 @@
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--light-bg);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
             max-width: 480px; /* 手機版型限制 */
             margin: 0 auto;
             border-left: 1px solid #fdebd0;
             border-right: 1px solid #fdebd0;
-            padding-bottom: 100px;
+            padding-bottom: 100px; /* 留給底部按鈕空間 */
         }
 
-        /* 1. 頂部 Banner (改寫為新內容) */
+        /* --- 頂部 Banner 設計 --- */
         header {
             background: linear-gradient(180deg, var(--primary-red) 0%, var(--dark-red) 100%);
             color: #fff;
-            padding: 30px 20px 40px; /* 增加底部留白給雲紋 */
+            padding: 35px 20px 45px;
             text-align: center;
             position: relative;
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 10;
         }
 
         h1 {
             font-size: 1.8rem;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--gold);
-            letter-spacing: 2px;
             font-weight: bold;
-            margin-top: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
-        .contact-pill {
+        .contact-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.15);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 15px;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
-        /* 雲紋裝飾 */
+        /* --- 雲紋裝飾 --- */
         .cloud-border {
-            height: 12px;
-            background: radial-gradient(circle, var(--primary-red) 6px, transparent 7px);
-            background-size: 24px 24px;
-            margin-top: -12px;
+            height: 14px;
+            background: radial-gradient(circle, var(--primary-red) 7px, transparent 8px);
+            background-size: 20px 20px;
+            margin-top: -14px;
             position: relative;
             z-index: 5;
+            opacity: 0.9;
         }
 
-        main {
-            padding: 25px 15px;
-        }
+        main { padding: 25px 15px; }
 
-        /* 卡片通用樣式 (保留第一版的動畫與質感) */
+        /* --- 卡片通用樣式 (含動畫) --- */
         .section-card {
             background: #fff;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #fdebd0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-
-        .section-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-header {
-            background: #fffbf0;
-            padding: 15px;
-            border-bottom: 1px dashed #eee;
-            color: var(--dark-red);
-            font-weight: bold;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .card-header::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 16px;
-            background-color: var(--gold);
-            margin-right: 10px;
-            border-radius: 2px;
-        }
-
-        /* 產品列表網格 (對應新圖片的排版) */
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0; /* 無間隙，靠邊框分隔 */
-        }
-
-        .catalog-item {
-            padding: 15px 5px;
-            text-align: center;
-            border-right: 1px dashed #eee;
-            border-bottom: 1px dashed #eee;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100px;
-        }
-
-        .catalog-item:nth-child(3n) {
-            border-right: none; /* 每行最後一個去邊框 */
-        }
-
-        .item-name {
-            font-size: 0.9rem;
-            color: #333;
-            font-weight: bold;
-            margin-bottom: 4px;
-            line-height: 1.3;
-        }
-
-        .item-type {
-            font-size: 0.75rem;
-            color: var(--primary-red);
-            background: #fff0f0;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        /* 方言 T恤區 */
-        .dialect-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 15px;
-        }
-        
-        .dialect-item {
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 10px 5px;
-            text-align: center;
-        }
-
-        /* 底部懸浮按鈕 (第一版樣式) */
-        .cta-bar {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 440px;
-            background: var(--dark-red);
-            color: var(--gold);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 25px;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 100;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .cta-bar:active {
-            transform: translateX(-50%) scale(0.98);
-        }
-
-        .cta-btn {
-            background: var(--gold);
-            color: var(--dark-red);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>兩岸文創 潮玩未來</h1>
-        <div class="subtitle">- 紅薏米 文創產品 -</div>
-        <div class="contact-pill">
-            銷售/定制熱線: 135-17234133
-        </div>
-    </header>
-    <div class="cloud-border"></div>
-
-    <main>
-        
-        <div class="section-card scroll-reveal">
-            <div class="card-header">文創紀念品系列</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-name">台灣光復<br>紀念日</span>
-                    <span class="item-type">冰箱貼</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">台灣<br>文旦柚</span>
-                    <span class="item-type">香薰蠟燭</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">火燒赤壁<br>桌遊</span>
-                    <span class="item-type">紙牌</span>
-                </div>
-                
-                <div class="catalog-item">
-                    <span class="item-name">每一條路都是<br>回家的路</span>
-                    <span class="item-type">帆布袋</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">每一條路都是<br>回家的路</span>
-                    <span class="item-type">冰箱貼</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">每一條路都是<br>回家的路</span>
-                    <span class="item-type">折扇</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">主題設計系列</div>
-            <div class="catalog-grid">
-                <div class="catalog-item">
-                    <span class="item-name">台北路的盡頭<br>是解放大道</span>
-                    <span class="item-type">帆布袋</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">琴台<br>遇知音</span>
-                    <span class="item-type">折扇</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">嘉慶君<br>遊台灣</span>
-                    <span class="item-type">折扇</span>
-                </div>
-
-                <div class="catalog-item">
-                    <span class="item-name">金蟾<br>招財</span>
-                    <span class="item-type">擺件</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">金蟾<br>招財</span>
-                    <span class="item-type">抱枕</span>
-                </div>
-                <div class="catalog-item">
-                    <span class="item-name">漢劇<br>漢韻</span>
-                    <span class="item-type">絲巾</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card scroll-reveal">
-            <div class="card-header">武漢方言系列</div>
-            <div class="dialect-grid">
-                <div class="dialect-item">
-                    <div class="item-name">武漢方言<br>吧唧</div>
-                    <div class="item-type">徽章</div>
-                </div>
-                <div class="dialect-item">
-                    <div class="item-name">武漢方言<br>蒜鳥</div>
-                    <div class="item-type">T恤</div>
-                </div>
-                <div class="dialect-item">
-                    <div class="item-name">武漢方言<br>虛狐</div>
-                    <div class="item-type">T恤</div>
-                </div>
-                <div class="dialect-item">
-                    <div class="item-name">武漢方言<br>裹鯨</div>
-                    <div class="item-type">T恤</div>
-                </div>
-                <div class="dialect-item">
-                    <div class="
+            border-radius: 16px
